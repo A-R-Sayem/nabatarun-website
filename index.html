@@ -530,11 +530,25 @@
         }
 
         // গুগল শিট থেকে রিয়েল-টাইম ডাটা ফেচ করার ফাংশন
+        // Sends a POST to the Apps Script and tries to read its JSON reply
+        async function postToBackend(payloadObj) {
+            const res = await fetch(BACKEND_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+                body: 'payload=' + encodeURIComponent(JSON.stringify(payloadObj))
+            });
+            return await res.json();
+        }
+
         async function fetchBackendData() {
             if (!BACKEND_URL || BACKEND_URL.includes('YOUR_DEPLOYED_WEB_APP_ID')) return;
             try {
-                const res = await fetch(BACKEND_URL);
+                const res = await fetch(BACKEND_URL + '?t=' + Date.now());
                 const json = await res.json();
+                if (json && json.status === 'error') {
+                    console.error('Backend error:', json.message);
+                    return;
+                }
                 if (json && json.data) {
                     applications = json.data.map(item => ({
                         id: String(item.id || ''),
@@ -582,18 +596,17 @@
             renderDashboard();
 
             if (BACKEND_URL && !BACKEND_URL.includes('YOUR_DEPLOYED_WEB_APP_ID')) {
-                const payload = JSON.stringify({
-                    action: 'update_status',
-                    id: applications[index].id,
-                    field: field,
-                    value: status
-                });
-                fetch(BACKEND_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: 'payload=' + encodeURIComponent(payload)
-                });
+                try {
+                    const r = await postToBackend({
+                        action: 'update_status',
+                        id: applications[index].id,
+                        field: field,
+                        value: status
+                    });
+                    if (r.status !== 'success') console.error('Update failed:', r.message);
+                } catch (err) {
+                    console.error('Update request failed:', err);
+                }
             }
         }
 
@@ -805,16 +818,19 @@
                 };
 
                 if (BACKEND_URL) {
-                    await fetch(BACKEND_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                        },
-                        body: 'payload=' + encodeURIComponent(JSON.stringify(payload))
-                    });
+                    let reply = null;
+                    try {
+                        reply = await postToBackend(payload);
+                    } catch (netErr) {
+                        console.warn('Could not read backend reply (request may still have been saved):', netErr);
+                    }
 
-                    alert(`আবেদন সফলভাবে জমা হয়েছে এবং ${NOTIFICATION_EMAIL}-এ পাঠানোর জন্য প্রেরণ করা হয়েছে।\nআপনার ট্র্যাকিং আইডি: ${newId}\nঅনুগ্রহ করে ট্র্যাকিং আইডিটি সংরক্ষণ করুন।`);
+                    if (reply && reply.status === 'error') {
+                        console.error('Backend error:', reply.message);
+                        alert(`আবেদনটি এই ডিভাইসে সংরক্ষিত হয়েছে, কিন্তু সার্ভারে সংরক্ষণ করা যায়নি।\nকারণ: ${reply.message}\nট্র্যাকিং আইডি: ${newId}`);
+                    } else {
+                        alert(`আবেদন সফলভাবে জমা হয়েছে।\nআপনার ট্র্যাকিং আইডি: ${newId}\nঅনুগ্রহ করে ট্র্যাকিং আইডিটি সংরক্ষণ করুন।`);
+                    }
                 }
 
                 document.getElementById('application-form').reset();
@@ -832,7 +848,8 @@
             }
         }
 
-        function performTrackingSearch() {
+        async function performTrackingSearch() {
+            await fetchBackendData();
             const query = document.getElementById('track-search-input').value.trim().toLowerCase();
             const resultBox = document.getElementById('tracking-result-box');
 
@@ -1051,6 +1068,7 @@
             notices.unshift(newNotice);
 
             saveData();
+            updateAppStatus(index, 'publishedNoticeId', noticeId);
             updateAppStatus(index, 'isPublished', true);
 
             renderDashboard();
@@ -1065,6 +1083,10 @@
                 applications = applications.filter(a => a.id !== appId);
                 saveData();
                 renderDashboard();
+                if (BACKEND_URL && !BACKEND_URL.includes('YOUR_DEPLOYED_WEB_APP_ID')) {
+                    postToBackend({ action: 'delete_application', id: appId })
+                        .catch(err => console.error('Delete sync failed:', err));
+                }
             }
         }
 

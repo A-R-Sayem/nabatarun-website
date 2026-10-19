@@ -45,21 +45,15 @@
             <div class="flex justify-between items-center h-20">
                 <!-- Logo & Brand -->
                 <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="switchTab('home')">
-                    <img src="1000115982_2.png" alt="নবতরুণ লোগো" class="h-14 w-14 object-contain rounded-full shadow-sm border border-emerald-500/20" onerror="this.onerror=null; this.src='1000115982.png';">
+                    <img data-logo src="1000115982_2.png" alt="নবতরুণ লোগো" class="h-14 w-14 object-contain rounded-full shadow-sm border border-emerald-500/20" onerror="this.onerror=null; this.src='1000115982.png';">
                     <div>
-                        <h1 class="text-2xl font-bold text-navy-800 leading-tight">নবতরুণ সংস্থা</h1>
-                        <p class="text-xs text-emerald-600 font-medium">সামাজিক উন্নয়ন • মানবসেবা • যুব উন্নয়ন</p>
+                        <h1 id="cfg-name" class="text-2xl font-bold text-navy-800 leading-tight">নবতরুণ সংস্থা</h1>
+                        <p id="cfg-tagline" class="text-xs text-emerald-600 font-medium">সামাজিক উন্নয়ন • মানবসেবা • যুব উন্নয়ন</p>
                     </div>
                 </div>
 
                 <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-6 space-x-reverse font-semibold text-slate-700">
-                    <button onclick="switchTab('home')" class="nav-btn hover:text-emerald-600 py-2 px-1 transition duration-150" id="nav-home">হোমপেজ</button>
-                    <button onclick="switchTab('apply')" class="nav-btn hover:text-emerald-600 py-2 px-1 transition duration-150" id="nav-apply">আবেদন জমা দিন</button>
-                    <button onclick="switchTab('track')" class="nav-btn hover:text-emerald-600 py-2 px-1 transition duration-150" id="nav-track">আবেদন ট্র্যাকিং</button>
-                    <button onclick="switchTab('notices')" class="nav-btn hover:text-emerald-600 py-2 px-1 transition duration-150" id="nav-notices">নোটিশ বোর্ড</button>
-                    <button onclick="switchTab('dashboard')" class="nav-btn hover:text-emerald-600 py-2 px-1 transition duration-150" id="nav-dashboard">অ্যাডমিন ড্যাশবোর্ড</button>
-                </nav>
+                <nav id="main-nav" class="hidden md:flex items-center gap-5 font-semibold text-slate-700"></nav>
 
                 <!-- Current User Badge / Auth Button -->
                 <div class="flex items-center space-x-3 space-x-reverse">
@@ -75,6 +69,7 @@
             </div>
         </div>
     </header>
+    <div id="mobile-nav" class="md:hidden bg-white border-b overflow-x-auto flex gap-5 px-4 py-2 text-sm font-semibold whitespace-nowrap"></div>
 
     <!-- Main Content Container -->
     <main class="flex-grow">
@@ -105,7 +100,7 @@
                     <div class="md:w-2/5 flex justify-center">
                         <div class="relative">
                             <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-navy-800 rounded-full blur opacity-50 animate-pulse"></div>
-                            <img src="1000115982_2.png" alt="নবতরুণ লোগো" class="relative w-64 h-64 sm:w-80 sm:h-80 object-contain bg-white rounded-full p-4 shadow-2xl border-4 border-white" onerror="this.onerror=null; this.src='1000115982.png';">
+                            <img data-logo src="1000115982_2.png" alt="নবতরুণ লোগো" class="relative w-64 h-64 sm:w-80 sm:h-80 object-contain bg-white rounded-full p-4 shadow-2xl border-4 border-white" onerror="this.onerror=null; this.src='1000115982.png';">
                         </div>
                     </div>
                 </div>
@@ -145,6 +140,8 @@
                 </div>
             </div>
 
+            <div id="home-custom-features" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12"></div>
+
             <!-- Notice Highlights on Homepage -->
             <div class="bg-slate-100 py-12 border-t border-b border-slate-200">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -171,7 +168,7 @@
                         <h2 class="text-2xl sm:text-3xl font-bold mt-1">আবেদন ফরম জমা দিন</h2>
                         <p class="text-slate-300 text-sm mt-1">নবতরুণ সংস্থার যেকোনো অফিশিয়াল কাজের আবেদনের জন্য নিম্নোক্ত ফরমটি পূরণ করুন।</p>
                     </div>
-                    <img src="1000115982_2.png" alt="লোগো" class="h-16 w-16 bg-white rounded-full p-1 shadow hidden sm:block" onerror="this.onerror=null; this.src='1000115982.png';">
+                    <img data-logo src="1000115982_2.png" alt="লোগো" class="h-16 w-16 bg-white rounded-full p-1 shadow hidden sm:block" onerror="this.onerror=null; this.src='1000115982.png';">
                 </div>
 
                 <form id="application-form" onsubmit="handleApplicationSubmit(event)" class="p-6 sm:p-8 space-y-6">
@@ -204,7 +201,17 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div id="member-extra" class="hidden space-y-4 bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+<p class="font-bold text-emerald-800 text-sm"><i class="fa-solid fa-id-card"></i> সদস্যপদের অতিরিক্ত তথ্য <span class="font-normal text-xs">(উপরের নামের ঘরে বাংলায় নাম লিখুন)</span></p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div><label class="block text-sm font-semibold mb-1">Name (English) *</label><input id="m-name-en" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 outline-none"></div>
+<div><label class="block text-sm font-semibold mb-1">পিতার নাম *</label><input id="m-father" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 outline-none"></div>
+<div><label class="block text-sm font-semibold mb-1">NID নম্বর *</label><input id="m-nid" pattern="[0-9০-৯]{10,17}" title="১০, ১৩ বা ১৭ অঙ্কের NID নম্বর" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 outline-none"></div>
+<div><label class="block text-sm font-semibold mb-1">ছবি (ঐচ্ছিক)</label><input type="file" accept="image/*" onchange="imgResize(this.files[0],320,d=>{window.mPhoto=d;$('m-preview').src=d;$('m-preview').classList.remove('hidden')})" class="text-sm"><img id="m-preview" class="hidden w-20 h-20 object-cover rounded-lg mt-2 border"></div>
+<div><label class="block text-sm font-semibold mb-1">বর্তমান ঠিকানা *</label><textarea id="m-present" rows="2" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 outline-none"></textarea></div>
+<div><label class="block text-sm font-semibold mb-1">স্থায়ী ঠিকানা *</label><textarea id="m-permanent" rows="2" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 outline-none"></textarea></div>
+</div></div>
+<div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">আবেদনের বিবরণ/বিষয়বস্তু *</label>
                         <textarea id="application-details" rows="5" required placeholder="আপনার আবেদন সম্পর্কে বিস্তারিত লিখুন..." class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"></textarea>
                     </div>
@@ -299,6 +306,8 @@
                 </div>
             </div>
 
+            <div id="dash-tabs" class="flex flex-wrap gap-2 mb-6"></div>
+            <div id="dash-apps">
             <!-- Workflow Summary Cards -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
@@ -370,7 +379,11 @@
                     </table>
                 </div>
             </div>
+            </div>
+            <div id="admin-panels" class="hidden"></div>
         </section>
+        <section id="section-council" class="tab-content hidden py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"><div id="council-view"></div></section>
+        <section id="section-feature" class="tab-content hidden py-10 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto"><div id="feature-view"></div></section>
     </main>
 
     <!-- Footer -->
@@ -379,10 +392,10 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div class="space-y-4">
                     <div class="flex items-center space-x-3 space-x-reverse">
-                        <img src="1000115982_2.png" alt="লোগো" class="h-12 w-12 bg-white rounded-full p-0.5" onerror="this.onerror=null; this.src='1000115982.png';">
-                        <span class="text-xl font-bold text-white">নবতরুণ সংস্থা</span>
+                        <img data-logo src="1000115982_2.png" alt="লোগো" class="h-12 w-12 bg-white rounded-full p-0.5" onerror="this.onerror=null; this.src='1000115982.png';">
+                        <span id="cfg-fname" class="text-xl font-bold text-white">নবতরুণ সংস্থা</span>
                     </div>
-                    <p class="text-xs text-slate-300 leading-relaxed">
+                    <p id="cfg-about" class="text-xs text-slate-300 leading-relaxed">
                         নবতরুণ সংস্থা একটি অরাজনৈতিক, অলাভজনক সামাজিক উন্নয়নমূলক সংস্থা। আমরা সমাজে স্থায়ী ইতিবাচক পরিবর্তন আনতে প্রতিশ্রুতিবদ্ধ।
                     </p>
                 </div>
@@ -398,9 +411,9 @@
                 <div>
                     <h4 class="text-sm font-bold text-emerald-400 uppercase tracking-wider mb-3">যোগাযোগ</h4>
                     <ul class="space-y-2 text-xs text-slate-300">
-                        <li><i class="fa-solid fa-location-dot text-emerald-500 ml-2"></i> কেন্দ্রীয় কার্যালয়, ঢাকা, বাংলাদেশ</li>
-                        <li><i class="fa-solid fa-envelope text-emerald-500 ml-2"></i> nabataranasangstha@gmail.com</li>
-                        <li><i class="fa-solid fa-phone text-emerald-500 ml-2"></i> +৮৮০ ১৭০০ ০০০ ০০০</li>
+                        <li id="cfg-addr"><i class="fa-solid fa-location-dot text-emerald-500 ml-2"></i> কেন্দ্রীয় কার্যালয়, ঢাকা, বাংলাদেশ</li>
+                        <li id="cfg-email"><i class="fa-solid fa-envelope text-emerald-500 ml-2"></i> nabataranasangstha@gmail.com</li>
+                        <li id="cfg-phone"><i class="fa-solid fa-phone text-emerald-500 ml-2"></i> +৮৮০ ১৭০০ ০০০ ০০০</li>
                     </ul>
                 </div>
                 <div>
@@ -418,7 +431,9 @@
         </div>
     </footer>
 
-    <!-- LOGIN / ROLE SWITCH MODAL -->
+    <div id="app-modal" class="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center hidden p-4"><div id="app-modal-body" class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6"></div></div>
+
+    <!-- LOGIN / ROLE SWITCH MODAL WITH HIDDEN PASSWORD INPUT & TOGGLE -->
     <div id="login-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
         <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200">
             <div class="bg-navy-800 text-white p-5 flex justify-between items-center">
@@ -430,18 +445,7 @@
             </div>
             
             <form onsubmit="handleLoginSubmit(event)" class="p-6 space-y-4">
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">রোল / পদবী নির্বাচন করুন</label>
-                    <select id="login-role-select" onchange="togglePasswordFieldVisibility()" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
-                        <option value="president">সভাপতি (President)</option>
-                        <option value="secretary">সাধারণ সম্পাদক (General Secretary)</option>
-                        <option value="vice_president">সহ-সভাপতি (Vice President)</option>
-                        <option value="joint_secretary">যুগ্ম সাধারণ সম্পাদক (Joint Secretary)</option>
-                        <option value="office">দপ্তর সম্পাদক (Office Secretary)</option>
-                        <option value="admin">সুপার অ্যাডমিন (Super Admin)</option>
-                        <option value="visitor">সাধারণ সদস্য/দর্শনার্থী (Regular)</option>
-                    </select>
-                </div>
+                
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">ইউজার আইডি</label>
@@ -451,7 +455,9 @@
                 <div id="password-field-container">
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">পাসওয়ার্ড</label>
                     <div class="relative">
+                        <!-- MASKED SECURE PASSWORD INPUT -->
                         <input type="password" id="login-password" placeholder="পাসওয়ার্ড লিখুন..." class="w-full pl-3 pr-10 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+                        <!-- PASSWORD TOGGLE EYE ICON -->
                         <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-navy-800 focus:outline-none">
                             <i class="fa-solid fa-eye" id="toggle-password-icon"></i>
                         </button>
@@ -511,169 +517,45 @@
             }
         ];
 
-        // Backend Configuration
-        const BACKEND_URL = "https://script.google.com/macros/s/AKfycbxeoQUlXfr6W8maRBvr-pwkR2bGu_Ka7KKg1VLuFgB6ngTQAuqsrxmYrP2bzCTVMX-a/exec";
+        // Email/Backend Configuration
+        // Google Apps Script Web App URL এখানে বসাতে হবে।
+        // Apps Script deploy করার পর Web App URL এখানে বসান। URL ছাড়া সাইটটি শুধু demo/localStorage mode-এ চলবে।
+        const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbxeoQUlXfr6W8maRBvr-pwkR2bGu_Ka7KKg1VLuFgB6ngTQAuqsrxmYrP2bzCTVMX-a/exec';
+        const BACKEND_ENABLED = !BACKEND_URL.includes('PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE');
         const NOTIFICATION_EMAIL = 'nabataranasangstha@gmail.com';
         const MAX_ATTACHMENT_SIZE = 5 * 1024 * 1024;
 
+
+        // Login IDs and passwords are role-specific. Vice President and Joint Secretary are read-only guests.
         // State Management
-        let applications = JSON.parse(localStorage.getItem('nt_applications')) || JSON.parse(localStorage.getItem('nabatarun_apps')) || initialApplications;
-        let notices = JSON.parse(localStorage.getItem('nt_notices')) || JSON.parse(localStorage.getItem('nabatarun_notices')) || initialNotices;
+        let applications = JSON.parse(localStorage.getItem('nt_applications')) || initialApplications;
+        let notices = JSON.parse(localStorage.getItem('nt_notices')) || initialNotices;
         let currentUser = JSON.parse(localStorage.getItem('nt_user')) || { role: 'visitor', name: 'সাধারণ সদস্য/দর্শনার্থী' };
 
         function saveData() {
             localStorage.setItem('nt_applications', JSON.stringify(applications));
-            localStorage.setItem('nabatarun_apps', JSON.stringify(applications));
             localStorage.setItem('nt_notices', JSON.stringify(notices));
-            localStorage.setItem('nabatarun_notices', JSON.stringify(notices));
             localStorage.setItem('nt_user', JSON.stringify(currentUser));
         }
 
-        // গুগল শিট থেকে রিয়েল-টাইম ডাটা ফেচ করার ফাংশন
-        // Sends a POST to the Apps Script and tries to read its JSON reply
-        async function postToBackend(payloadObj) {
-            const res = await fetch(BACKEND_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-                body: 'payload=' + encodeURIComponent(JSON.stringify(payloadObj))
-            });
-            return await res.json();
-        }
-
-        async function fetchBackendData() {
-            if (!BACKEND_URL || BACKEND_URL.includes('YOUR_DEPLOYED_WEB_APP_ID')) return;
-            try {
-                let json;
-                try {
-                    const res = await fetch(BACKEND_URL + '?t=' + Date.now());
-                    json = await res.json();
-                } catch (fetchErr) {
-                    console.warn('fetch() failed, trying JSONP fallback:', fetchErr);
-                    json = await loadViaJsonp();
-                }
-                if (!json || json.status === 'error') {
-                    const msg = json ? json.message : 'কোনো উত্তর পাওয়া যায়নি';
-                    console.error('Backend error:', msg);
-                    showSyncError('গুগল শিট থেকে ডাটা লোড হয়নি: ' + msg);
-                    return;
-                }
-                hideSyncError();
-                if (json && json.data) {
-                    applications = json.data.map(item => ({
-                        id: String(item.id || ''),
-                        date: String(item.date || ''),
-                        name: String(item.name || ''),
-                        phone: String(item.phone || ''),
-                        email: String(item.email || ''),
-                        category: String(item.category || ''),
-                        details: String(item.details || ''),
-                        presidentApproval: String(item.presidentApproval || 'PENDING'),
-                        secretaryApproval: String(item.secretaryApproval || 'PENDING'),
-                        isPublished: item.isPublished === true || item.isPublished === 'TRUE' || item.published === true || item.published === 'TRUE',
-                        publishedNoticeId: item.publishedNoticeId || null,
-                        rejectionReason: String(item.rejectionReason || '')
-                    }));
-                    saveData();
-
-                    // প্রকাশিত নোটিশসমূহ আলাদা করা
-                    notices = applications.filter(a => a.isPublished).map(app => ({
-                        id: app.publishedNoticeId || ('NT-N-' + app.id),
-                        appId: app.id,
-                        title: app.category + ': ' + app.name + '-এর আবেদন মঞ্জুর সংক্রান্ত',
-                        category: app.category,
-                        content: app.details,
-                        date: app.date,
-                        publisher: 'দপ্তর সম্পাদক',
-                        memo: 'MEMO/' + app.id
-                    }));
-                    localStorage.setItem('nt_notices', JSON.stringify(notices));
-                    localStorage.setItem('nabatarun_notices', JSON.stringify(notices));
-
-                    renderDashboard();
-                    renderNotices();
-                    renderHomeNotices();
-                }
-            } catch (err) {
-                console.error('Error fetching backend data:', err);
-                showSyncError('গুগল শিট থেকে ডাটা লোড করা যায়নি। Apps Script ডিপ্লয়মেন্ট (Anyone access) ও BACKEND_URL যাচাই করুন।');
-            }
-        }
-
-        // Loads the backend JSON through a <script> tag (works even when fetch is blocked by CORS)
-        function loadViaJsonp() {
-            return new Promise((resolve, reject) => {
-                const cbName = 'ntJsonp_' + Date.now();
-                const script = document.createElement('script');
-                const timer = setTimeout(() => { cleanup(); reject(new Error('JSONP timeout')); }, 20000);
-                function cleanup() {
-                    clearTimeout(timer);
-                    delete window[cbName];
-                    script.remove();
-                }
-                window[cbName] = (data) => { cleanup(); resolve(data); };
-                script.onerror = () => { cleanup(); reject(new Error('JSONP load error')); };
-                script.src = BACKEND_URL + '?callback=' + cbName + '&t=' + Date.now();
-                document.body.appendChild(script);
-            });
-        }
-
-        function showSyncError(msg) {
-            let bar = document.getElementById('sync-error-bar');
-            if (!bar) {
-                bar = document.createElement('div');
-                bar.id = 'sync-error-bar';
-                bar.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-red-600 text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-lg max-w-[90vw]';
-                document.body.appendChild(bar);
-            }
-            bar.textContent = msg;
-        }
-
-        function hideSyncError() {
-            const bar = document.getElementById('sync-error-bar');
-            if (bar) bar.remove();
-        }
-
-        // অনুমোদন আপডেট করার সময় গুগল শিটেও ডাটা সিঙ্ক করার আপডেট
-        async function updateAppStatus(index, field, status) {
-            applications[index][field] = status;
-            saveData();
-            renderDashboard();
-
-            if (BACKEND_URL && !BACKEND_URL.includes('YOUR_DEPLOYED_WEB_APP_ID')) {
-                try {
-                    const r = await postToBackend({
-                        action: 'update_status',
-                        id: applications[index].id,
-                        field: field,
-                        value: status
-                    });
-                    if (r.status !== 'success') console.error('Update failed:', r.message);
-                } catch (err) {
-                    console.error('Update request failed:', err);
-                }
-            }
-        }
-
         function resetDemoData() {
+            if(currentUser.role!=='admin') return alert('শুধু সুপার অ্যাডমিন রিসেট করতে পারবেন।');
             if(confirm("আপনি কি নিশ্চিত যে সকল ডেমো ডাটা রিসেট করতে চান?")) {
                 applications = [...initialApplications];
                 notices = [...initialNotices];
                 saveData();
-                renderDashboard();
-                renderNotices();
-                renderHomeNotices();
+                renderAll();
                 alert("ডাটা সফলভাবে রিসেট করা হয়েছে।");
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        window.onload = function() {
             updateUserUI();
-            fetchBackendData();
             renderHomeNotices();
             renderNotices();
             renderDashboard();
-            switchTab('home');
-        });
+            loadRemoteData();
+        };
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -688,16 +570,18 @@
             if(activeNav) activeNav.classList.add('text-emerald-600', 'border-b-2', 'border-emerald-600');
 
             if(tabId === 'notices') renderNotices();
-            if(tabId === 'dashboard') { renderDashboard(); fetchBackendData(); }
+            if(tabId === 'dashboard') renderDashboard();
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Login Logic & Hidden Password Handlers
         function openLoginModal() {
             document.getElementById('login-modal').classList.remove('hidden');
             document.getElementById('login-error-msg').classList.add('hidden');
             document.getElementById('login-password').value = '';
             
+            // Reset Password Mask Field to Hidden State
             const passwordInput = document.getElementById('login-password');
             const icon = document.getElementById('toggle-password-icon');
             passwordInput.type = 'password';
@@ -794,6 +678,7 @@
             if(welcomeText) welcomeText.textContent = info.welcome;
         }
 
+        // Submit Application
         async function handleApplicationSubmit(e) {
             e.preventDefault();
 
@@ -821,7 +706,7 @@
                 email: email,
                 category: category,
                 details: details,
-                attachmentName: file ? file.name : '',
+                attachmentName: file ? file.name : '', member: collectMember(),
                 presidentApproval: 'PENDING',
                 secretaryApproval: 'PENDING',
                 publishedNoticeId: null,
@@ -861,20 +746,11 @@
                     attachment: attachment
                 };
 
-                if (BACKEND_URL) {
-                    let reply = null;
-                    try {
-                        reply = await postToBackend(payload);
-                    } catch (netErr) {
-                        console.warn('Could not read backend reply (request may still have been saved):', netErr);
-                    }
-
-                    if (reply && reply.status === 'error') {
-                        console.error('Backend error:', reply.message);
-                        alert(`আবেদনটি এই ডিভাইসে সংরক্ষিত হয়েছে, কিন্তু সার্ভারে সংরক্ষণ করা যায়নি।\nকারণ: ${reply.message}\nট্র্যাকিং আইডি: ${newId}`);
-                    } else {
-                        alert(`আবেদন সফলভাবে জমা হয়েছে।\nআপনার ট্র্যাকিং আইডি: ${newId}\nঅনুগ্রহ করে ট্র্যাকিং আইডিটি সংরক্ষণ করুন।`);
-                    }
+                if (!BACKEND_ENABLED) {
+                    alert(`আবেদনটি এই ব্রাউজারে ডেমো হিসেবে সংরক্ষিত হয়েছে।\nট্র্যাকিং আইডি: ${newId}\n\nঅনলাইন Gmail/Drive সংযোগের জন্য BACKEND_URL বসাতে হবে।`);
+                } else {
+                    await postToBackend(payload);
+                    alert(`আবেদন সফলভাবে অনলাইনে জমা হয়েছে।\nট্র্যাকিং আইডি: ${newId}\n\nআবেদনটি ${NOTIFICATION_EMAIL}-এ নোটিফিকেশন পাঠাবে এবং Google Drive-এ সংরক্ষিত হবে।`);
                 }
 
                 document.getElementById('application-form').reset();
@@ -882,8 +758,8 @@
                 switchTab('track');
                 performTrackingSearch();
             } catch (error) {
-                console.error('Submission error:', error);
-                alert(`আবেদনটি সংরক্ষিত হয়েছে।\nট্র্যাকিং আইডি: ${newId}`);
+                console.error('Submission/email error:', error);
+                alert(`আবেদনটি লোকালভাবে সংরক্ষিত হয়েছে, কিন্তু Gmail-এ পাঠানো যায়নি।\nট্র্যাকিং আইডি: ${newId}\n\nপরে আবার চেষ্টা করুন বা প্রশাসকের সাথে যোগাযোগ করুন।`);
             } finally {
                 if (submitButton) {
                     submitButton.disabled = false;
@@ -892,8 +768,43 @@
             }
         }
 
-        async function performTrackingSearch() {
-            await fetchBackendData();
+        async function postToBackend(payload) {
+            const body = 'payload=' + encodeURIComponent(JSON.stringify(payload));
+            await fetch(BACKEND_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                body
+            });
+        }
+
+        function loadRemoteData() {
+            if (!BACKEND_ENABLED) return;
+            const callback = 'ntCallback_' + Date.now();
+            window[callback] = function(data) {
+                try {
+                    if (data && data.ok) {
+                        applications = data.applications || [];
+                        notices = [...notices.filter(n => n.local && !(data.notices||[]).some(m => m.id === n.id)), ...(data.notices||[])];
+                        if (data.config) mergePub(data.config);
+                        saveData();
+                        renderAll();
+                    }
+                } finally {
+                    delete window[callback];
+                    const tag = document.getElementById(callback);
+                    if (tag) tag.remove();
+                }
+            };
+            const script = document.createElement('script');
+            script.id = callback;
+            script.src = BACKEND_URL + '?action=list&callback=' + encodeURIComponent(callback);
+            script.onerror = function(){ delete window[callback]; script.remove(); };
+            document.body.appendChild(script);
+        }
+
+                // Tracking Logic
+        function performTrackingSearch() {
             const query = document.getElementById('track-search-input').value.trim().toLowerCase();
             const resultBox = document.getElementById('tracking-result-box');
 
@@ -929,14 +840,14 @@
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b pb-3">
                             <div>
                                 <span class="bg-navy-800 text-white text-xs px-2.5 py-1 rounded font-mono font-bold">${app.id}</span>
-                                <h4 class="font-bold text-slate-800 text-lg inline ml-2">${app.name}</h4>
+                                <h4 class="font-bold text-slate-800 text-lg inline ml-2">${esc(app.name)}</h4>
                             </div>
                             <span class="text-xs text-slate-500"><i class="fa-regular fa-calendar"></i> তারিখ: ${app.date}</span>
                         </div>
 
                         <div>
-                            <p class="text-xs font-bold text-emerald-600 mb-1">ক্যাটাগরি: ${app.category}</p>
-                            <p class="text-slate-700 text-sm">${app.details}</p>
+                            <p class="text-xs font-bold text-emerald-600 mb-1">ক্যাটাগরি: ${esc(app.category)}</p>
+                            <p class="text-slate-700 text-sm">${esc(app.details)}</p>
                         </div>
 
                         <div class="pt-2">
@@ -982,6 +893,7 @@
             return 'অপেক্ষমাণ';
         }
 
+        // Admin Dashboard Render & Actions
         function renderDashboard() {
             document.getElementById('stat-total-apps').textContent = applications.length;
             
@@ -1001,13 +913,13 @@
                 return;
             }
 
-            applications.forEach((app, idx) => {
+            applications.forEach(app => {
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-50 transition';
 
-                const canPresidentApprove = currentUser.role === 'president' || currentUser.role === 'admin';
-                const canSecretaryApprove = currentUser.role === 'secretary' || currentUser.role === 'admin';
-                const canOfficePublish = currentUser.role === 'office' || currentUser.role === 'admin';
+                const canPresidentApprove = can('approve_first');
+                const canSecretaryApprove = can('approve_second');
+                const canOfficePublish = can('publish');
 
                 const isBothApproved = app.presidentApproval === 'APPROVED' && app.secretaryApproval === 'APPROVED';
 
@@ -1017,18 +929,18 @@
                         <span class="text-slate-400 font-normal text-[11px]">${app.date}</span>
                     </td>
                     <td class="py-3 px-4">
-                        <div class="font-bold text-slate-800">${app.name}</div>
-                        <div class="text-slate-500 text-xs">${app.phone}</div>
+                        <div class="font-bold text-slate-800">${esc(app.name)}</div>
+                        <div class="text-slate-500 text-xs">${esc(app.phone)}</div>
                     </td>
                     <td class="py-3 px-4">
-                        <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-0.5 rounded font-medium mb-1">${app.category}</span>
-                        <p class="text-xs text-slate-600 line-clamp-2">${app.details}</p>
+                        <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-0.5 rounded font-medium mb-1">${esc(app.category)}</span>
+                        <p class="text-xs text-slate-600 line-clamp-2">${esc(app.details)}</p>
                     </td>
                     <td class="py-3 px-4 text-center">
-                        ${renderApprovalCell(app.id, idx, 'presidentApproval', app.presidentApproval, canPresidentApprove)}
+                        ${renderApprovalCell(app.id, 'president', app.presidentApproval, canPresidentApprove)}
                     </td>
                     <td class="py-3 px-4 text-center">
-                        ${renderApprovalCell(app.id, idx, 'secretaryApproval', app.secretaryApproval, canSecretaryApprove)}
+                        ${renderApprovalCell(app.id, 'secretary', app.secretaryApproval, canSecretaryApprove)}
                     </td>
                     <td class="py-3 px-4 text-center">
                         ${app.isPublished ? `
@@ -1048,7 +960,7 @@
                         `)}
                     </td>
                     <td class="py-3 px-4 text-center">
-                        <button onclick="deleteApplication('${app.id}')" class="text-red-500 hover:text-red-700 p-1 rounded transition" title="আবেদন ডিলিট">
+                        <button onclick="viewApp('${app.id}')" class="text-blue-600 mr-2" title="বিস্তারিত"><i class="fa-solid fa-eye"></i></button>${can('open_vote')?`<button onclick="startVote('${app.id}')" class="text-purple-600 mr-2" title="ভোটাভুটি শুরু"><i class="fa-solid fa-check-to-slot"></i></button>`:''}<button style="${can('delete_app')?'':'display:none'}" onclick="deleteApplication('${app.id}')" class="text-red-500 hover:text-red-700 p-1 rounded transition" title="আবেদন ডিলিট">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </td>
@@ -1058,7 +970,7 @@
             });
         }
 
-        function renderApprovalCell(appId, idx, fieldName, currentStatus, canApprove) {
+        function renderApprovalCell(appId, roleType, currentStatus, canApprove) {
             if (currentStatus === 'APPROVED') {
                 return `
                     <span class="inline-flex items-center text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
@@ -1076,10 +988,10 @@
             if (canApprove) {
                 return `
                     <div class="flex items-center justify-center gap-1">
-                        <button onclick="updateAppStatus(${idx}, '${fieldName}', 'APPROVED')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-2.5 py-1 rounded font-bold transition" title="অনুমোদন করুন">
+                        <button onclick="updateApproval('${appId}', '${roleType}', 'APPROVED')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-2.5 py-1 rounded font-bold transition" title="অনুমোদন করুন">
                             <i class="fa-solid fa-check"></i>
                         </button>
-                        <button onclick="updateAppStatus(${idx}, '${fieldName}', 'REJECTED')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-2.5 py-1 rounded font-bold transition" title="বাতিল করুন">
+                        <button onclick="updateApproval('${appId}', '${roleType}', 'REJECTED')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-2.5 py-1 rounded font-bold transition" title="বাতিল করুন">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
@@ -1089,11 +1001,28 @@
             return `<span class="text-xs text-amber-600 bg-amber-50 px-2 py-0.5 rounded font-medium border border-amber-200">অপেক্ষমাণ</span>`;
         }
 
-        function publishNotice(appId) {
-            const index = applications.findIndex(a => a.id === appId);
-            if (index === -1) return;
+        async function updateApproval(appId, roleType, status) {
+            const app = applications.find(a => a.id === appId);
+            if (!app) return;
+            if (!can(roleType==='president'?'approve_first':'approve_second')) return;
+            if (roleType === 'secretary' && app.presidentApproval !== 'APPROVED' && status === 'APPROVED') { alert('সভাপতির অনুমোদনের আগে সাধারণ সম্পাদক অনুমোদন করতে পারবেন না।'); return; }
+            if (roleType === 'president') app.presidentApproval = status;
+            if (roleType === 'secretary') app.secretaryApproval = status;
+            saveData();
+            renderDashboard();
+            if (BACKEND_ENABLED) {
+                try {
+                    await postToBackend({action:'approval', appId, roleType, status, actor: currentUser.name});
+                    loadRemoteData();
+                } catch(e) { alert('অনলাইন approval পাঠানো যায়নি।'); }
+            }
+        }
 
-            const app = applications[index];
+        function publishNotice(appId) {
+            if(!can('publish')) return;
+            const app = applications.find(a => a.id === appId);
+            if (!app) return;
+
             const noticeId = 'NOT-' + Math.floor(1000 + Math.random() * 9000);
             const today = new Date().toISOString().split('T')[0];
 
@@ -1112,28 +1041,26 @@
             notices.unshift(newNotice);
 
             saveData();
-            updateAppStatus(index, 'publishedNoticeId', noticeId);
-            updateAppStatus(index, 'isPublished', true);
-
             renderDashboard();
             renderNotices();
             renderHomeNotices();
+            if (BACKEND_ENABLED) {
+                postToBackend({action:'publish_notice', application: app, notice: newNotice, actor: currentUser.name}).then(()=>loadRemoteData());
+            }
 
             alert(`অফিশিয়াল নোটিশ (আইডি: ${noticeId}) সফলভাবে নোটিশ বোর্ডে প্রকাশিত হয়েছে!`);
         }
 
         function deleteApplication(appId) {
-            if(confirm('আপনি কি নিশ্চিত যে এই আবেদনটি মুছে ফেলতে চান?')) {
+            if(can('delete_app') && confirm('আপনি কি নিশ্চিত যে এই আবেদনটি মুছে ফেলতে চান?')) {
                 applications = applications.filter(a => a.id !== appId);
                 saveData();
                 renderDashboard();
-                if (BACKEND_URL && !BACKEND_URL.includes('YOUR_DEPLOYED_WEB_APP_ID')) {
-                    postToBackend({ action: 'delete_application', id: appId })
-                        .catch(err => console.error('Delete sync failed:', err));
-                }
+                if (BACKEND_ENABLED) postToBackend({action:'delete_application', appId, actor: currentUser.name}).catch(() => {});
             }
         }
 
+        // Notice Board Rendering
         function renderNotices() {
             const container = document.getElementById('notices-list-container');
             const filterCategory = document.getElementById('notice-filter-category').value;
@@ -1159,19 +1086,19 @@
                     <div class="absolute top-0 right-0 w-2 h-full bg-emerald-500"></div>
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4 border-b border-slate-100 pb-3">
                         <div class="flex items-center gap-2">
-                            <img src="1000115982_2.png" alt="লোগো" class="h-8 w-8 rounded-full bg-slate-100 p-0.5" onerror="this.onerror=null; this.src='1000115982.png';">
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full">${notice.category}</span>
-                            <span class="text-xs text-slate-400 font-mono">স্মারক: ${notice.id}</span>
+                            <img data-logo src="1000115982_2.png" alt="লোগো" class="h-8 w-8 rounded-full bg-slate-100 p-0.5" onerror="this.onerror=null; this.src='1000115982.png';">
+                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full">${esc(notice.category)}</span>
+                            <span class="text-xs text-slate-400 font-mono">স্মারক: ${esc(notice.id)}</span>
                         </div>
-                        <span class="text-xs text-slate-500"><i class="fa-regular fa-calendar"></i> প্রকাশ কাল: ${notice.date}</span>
+                        <span class="text-xs text-slate-500"><i class="fa-regular fa-calendar"></i> প্রকাশ কাল: ${esc(notice.date)}</span>
                     </div>
 
-                    <h3 class="text-xl font-bold text-navy-800 mb-3">${notice.title}</h3>
-                    <p class="text-slate-700 text-sm leading-relaxed mb-6 bg-slate-50 p-4 rounded-xl border border-slate-100">${notice.content}</p>
+                    <h3 class="text-xl font-bold text-navy-800 mb-3">${esc(notice.title)}</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed mb-6 bg-slate-50 p-4 rounded-xl border border-slate-100">${esc(notice.content)}</p>
 
                     <div class="flex justify-between items-center text-xs text-slate-500 border-t border-slate-100 pt-3">
-                        <span class="font-semibold text-navy-800"><i class="fa-solid fa-feather-pointed text-emerald-600"></i> অনুমোদন ও প্রকাশনা: ${notice.publisher || 'দপ্তর সম্পাদক'}</span>
-                        <button onclick="printNotice('${notice.id}')" class="text-slate-600 hover:text-emerald-600 font-bold flex items-center gap-1 transition">
+                        <span class="font-semibold text-navy-800"><i class="fa-solid fa-feather-pointed text-emerald-600"></i> অনুমোদন ও প্রকাশনা: ${esc(notice.publisher)}</span>
+                        <button onclick="printNotice('${esc(notice.id)}')" class="text-slate-600 hover:text-emerald-600 font-bold flex items-center gap-1 transition">
                             <i class="fa-solid fa-print"></i> প্রিন্ট/ডাউনলোড
                         </button>
                     </div>
@@ -1197,11 +1124,11 @@
                 item.innerHTML = `
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">${notice.category}</span>
-                            <span class="text-[11px] text-slate-400">${notice.date}</span>
+                            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">${esc(notice.category)}</span>
+                            <span class="text-[11px] text-slate-400">${esc(notice.date)}</span>
                         </div>
-                        <h4 class="font-bold text-navy-800 text-base mb-2">${notice.title}</h4>
-                        <p class="text-xs text-slate-600 line-clamp-2">${notice.content}</p>
+                        <h4 class="font-bold text-navy-800 text-base mb-2">${esc(notice.title)}</h4>
+                        <p class="text-xs text-slate-600 line-clamp-2">${esc(notice.content)}</p>
                     </div>
                     <button onclick="switchTab('notices')" class="mt-4 text-xs font-bold text-emerald-600 hover:underline text-left">বিস্তারিত বিবরণ দেখুন &rarr;</button>
                 `;
@@ -1217,7 +1144,7 @@
             printWindow.document.write(`
                 <html>
                 <head>
-                    <title>অফিশিয়াল নোটিশ - ${notice.id}</title>
+                    <title>অফিশিয়াল নোটিশ - ${esc(notice.id)}</title>
                     <style>
                         body { font-family: 'Arial', sans-serif; padding: 40px; color: #1e293b; }
                         .header { text-align: center; border-bottom: 2px solid #10B981; padding-bottom: 20px; margin-bottom: 30px; }
@@ -1233,16 +1160,16 @@
                 </head>
                 <body>
                     <div class="header">
-                        <img src="1000115982_2.png" class="logo" alt="লোগো" onerror="this.onerror=null; this.src='1000115982.png';">
+                        <img data-logo src="1000115982_2.png" class="logo" alt="লোগো" onerror="this.onerror=null; this.src='1000115982.png';">
                         <div class="title">নবতরুণ সংস্থা</div>
                         <div class="subtitle">সামাজিক উন্নয়ন • মানবসেবা • যুব উন্নয়ন</div>
                     </div>
                     <div class="meta">
-                        <span>স্মারক নম্বর: ${notice.id}</span>
-                        <span>তারিখ: ${notice.date}</span>
+                        <span>স্মারক নম্বর: ${esc(notice.id)}</span>
+                        <span>তারিখ: ${esc(notice.date)}</span>
                     </div>
-                    <div class="notice-title">${notice.title}</div>
-                    <div class="content">${notice.content}</div>
+                    <div class="notice-title">${esc(notice.title)}</div>
+                    <div class="content">${esc(notice.content)}</div>
                     <div class="footer">
                         <div>
                             <div class="sig-line"></div>
@@ -1254,7 +1181,7 @@
                         </div>
                         <div>
                             <div class="sig-line"></div>
-                            ${notice.publisher || 'দপ্তর সম্পাদক'}
+                            ${esc(notice.publisher)}
                         </div>
                     </div>
                 </body>
@@ -1264,5 +1191,351 @@
             printWindow.print();
         }
     </script>
+<script>
+/* ===== নবতরুণ: কনফিগ ও সুপার অ্যাডমিন সিস্টেম (কোড বদলানোর দরকার নেই, সবই প্যানেল থেকে) ===== */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ALLP = {approve_first:'প্রথম অনুমোদন (সভাপতি-স্তর)', approve_second:'দ্বিতীয় অনুমোদন (সাধারণ সম্পাদক-স্তর)', publish:'আবেদনের নোটিশ প্রকাশ', post_notice:'সরাসরি নোটিশ দেওয়া/মোছা', delete_app:'আবেদন মোছা', manage_users:'আইডি ব্যবস্থাপনা', manage_roles:'পদবী ও অনুমতি', manage_features:'ফিচার/পেজ যোগ-সম্পাদনা', manage_categories:'ক্যাটাগরি', manage_settings:'সাইট সেটিংস', view_log:'লগ ও ব্যাকআপ'};
+const SEED = [['superadmin01','Adm!68Wp#','সুপার অ্যাডমিন','admin'],['president01','Prs@84Nq!','সভাপতি','president'],['secretary01','Sec!52Rx#','সাধারণ সম্পাদক','secretary'],['office01','Off#41Qz@','দপ্তর সম্পাদক','office'],['vp_guest01','Vp#73Lm@','সহ-সভাপতি','vice_president'],['js_guest01','Js@96Tk!','যুগ্ম সাধারণ সম্পাদক','joint_secretary']];
+const ICONS = {'fa-star':'তারকা','fa-heart':'হৃদয়','fa-book':'বই','fa-camera':'ছবি','fa-calendar-days':'ক্যালেন্ডার','fa-people-group':'মানুষ','fa-phone':'ফোন','fa-link':'লিংক','fa-bullhorn':'ঘোষণা','fa-hand-holding-heart':'সেবা'};
+let cfg = null, curTab = 'apps', editF = null;
+
+async function H(s) { try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('nt:' + s)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join(''); } catch (e) { return 'p:' + s; } }
+function defCfg() { return {
+  roles: [{key:'admin',name:'সুপার অ্যাডমিন',perms:Object.keys(ALLP),sys:1},
+    {key:'president',name:'সভাপতি',perms:['approve_first','post_notice','manage_features','manage_categories']},
+    {key:'secretary',name:'সাধারণ সম্পাদক',perms:['approve_second','post_notice','manage_features','manage_categories']},
+    {key:'office',name:'দপ্তর সম্পাদক',perms:['publish','post_notice']},
+    {key:'vice_president',name:'সহ-সভাপতি',perms:[]},{key:'joint_secretary',name:'যুগ্ম সাধারণ সম্পাদক',perms:[]}],
+  users: [], features: [], log: [],
+  cats: ['নতুন সদস্যপদ','ত্রাণ ও আর্থিক সাহায্য','রক্তদান নিবন্ধন','ইভেন্ট ও আয়োজন','অন্যান্য অভিযোগ/পরামর্শ'],
+  site: {name:'নবতরুণ সংস্থা',tagline:'সামাজিক উন্নয়ন • মানবসেবা • যুব উন্নয়ন',address:'কেন্দ্রীয় কার্যালয়, ঢাকা, বাংলাদেশ',email:'nabataranasangstha@gmail.com',phone:'+৮৮০ ১৭০০ ০০০ ০০০',about:'নবতরুণ সংস্থা একটি অরাজনৈতিক, অলাভজনক সামাজিক উন্নয়নমূলক সংস্থা। আমরা সমাজে স্থায়ী ইতিবাচক পরিবর্তন আনতে প্রতিশ্রুতিবদ্ধ।',logo:''}}; }
+async function initCfg() {
+  let c = null; try { c = JSON.parse(localStorage.getItem('nt_cfg')); } catch (e) {}
+  if (!c) { c = defCfg(); c.users = await Promise.all(SEED.map(async s => ({id:s[0],name:s[2],role:s[3],hash:await H(s[1]),plain:s[1],active:1}))); }
+  cfg = c; migrate(); migrate3();
+  if (currentUser.role !== 'visitor' && !currentUser.uid) currentUser = {role:'visitor',name:'সাধারণ সদস্য/দর্শনার্থী'};
+  localStorage.setItem('nt_cfg', JSON.stringify(cfg));
+}
+const pub = () => ({roles:cfg.roles,features:cfg.features,cats:cfg.cats,site:cfg.site,council:cfg.council});
+function mergePub(c) { if (c.roles && !c.roles.some(r => r.key === 'admin')) return; ['roles','features','cats','site','council'].forEach(k => { if (c[k]) cfg[k] = c[k]; }); saveCfg(true); }
+function saveCfg(quiet) { localStorage.setItem('nt_cfg', JSON.stringify(cfg)); applyCfg(); if (!quiet && BACKEND_ENABLED) postToBackend({action:'save_config',config:pub(),actor:currentUser.name}).catch(() => {}); }
+function log(m) { cfg.log.unshift({t:new Date().toLocaleString('bn-BD'),u:currentUser.uid || '-',m}); cfg.log = cfg.log.slice(0, 150); }
+const can = p => { const r = cfg && cfg.roles.find(x => x.key === currentUser.role); return !!r && (r.key === 'admin' || r.perms.includes(p)); };
+const canAssign = r => currentUser.role === 'admin' || (can('manage_users') && r.key !== 'admin' && r.perms.every(can));
+const canManage = u => { const r = cfg.roles.find(x => x.key === u.role); return currentUser.role === 'admin' || (can('manage_users') && !!r && canAssign(r)); };
+const fvis = f => f.vis === 'public' || currentUser.role !== 'visitor';
+
+function applyCfg() {
+  const s = cfg.site;
+  [['cfg-name',s.name],['cfg-tagline',s.tagline],['cfg-fname',s.name],['cfg-about',s.about]].forEach(([i,v]) => { if ($(i) && v) $(i).textContent = v; });
+  $('cfg-addr').innerHTML = '<i class="fa-solid fa-location-dot text-emerald-500 ml-2"></i> ' + esc(s.address);
+  $('cfg-email').innerHTML = '<i class="fa-solid fa-envelope text-emerald-500 ml-2"></i> ' + esc(s.email);
+  $('cfg-phone').innerHTML = '<i class="fa-solid fa-phone text-emerald-500 ml-2"></i> ' + esc(s.phone);
+  document.title = s.name + ' - ' + s.tagline;
+  if (s.logo) document.querySelectorAll('img[data-logo]').forEach(i => { i.onerror = null; i.src = s.logo; });
+  const it = [['home','হোমপেজ'],['apply','আবেদন জমা দিন'],['track','আবেদন ট্র্যাকিং'],['notices','নোটিশ বোর্ড'],['council','পরিষদ']];
+  cfg.features.filter(f => f.nav && fvis(f)).forEach(f => it.push(['f_' + f.id, f.title]));
+  if (currentUser.role !== 'visitor') it.push(['dashboard','প্যানেল']);
+  $('main-nav').innerHTML = it.map(i => `<button onclick="goto('${i[0]}')" id="nav-${i[0]}" class="nav-btn hover:text-emerald-600 py-2 px-1">${esc(i[1])}</button>`).join('');
+  $('mobile-nav').innerHTML = it.map(i => `<button onclick="goto('${i[0]}')" class="nav-btn">${esc(i[1])}</button>`).join('');
+  const cv = $('notice-filter-category').value, all = [...cfg.cats, 'সাধারণ নোটিশ'];
+  $('application-category').innerHTML = '<option value="">নির্বাচন করুন</option>' + cfg.cats.map(c => `<option>${esc(c)}</option>`).join('');
+  $('notice-filter-category').innerHTML = '<option value="ALL">সকল ক্যাটাগরি</option>' + all.map(c => `<option>${esc(c)}</option>`).join('');
+  $('notice-filter-category').value = cv; if (!$('notice-filter-category').value) $('notice-filter-category').value = 'ALL';
+  const hf = cfg.features.filter(f => f.home && fvis(f));
+  $('home-custom-features').innerHTML = hf.length ? `<div class="grid grid-cols-1 md:grid-cols-3 gap-6">${hf.map(f => `<button onclick="goto('f_${f.id}')" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md border border-slate-100 text-center"><div class="w-14 h-14 mx-auto bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl mb-3"><i class="fa-solid ${esc(f.icon)}"></i></div><h4 class="font-bold text-navy-800">${esc(f.title)}</h4></button>`).join('')}</div>` : '';
+  buildTabs();
+}
+function goto(id) { if (id.startsWith('f_')) { const f = cfg.features.find(x => x.id === id.slice(2)); if (f && f.type === 'link') { window.open(f.url, '_blank', 'noopener'); return; } } switchTab(id); }
+const _sw = switchTab;
+switchTab = function (t) {
+  if (t === 'dashboard' && currentUser.role === 'visitor') { openLoginModal(); return; }
+  if (t.startsWith('f_')) { const f = cfg.features.find(x => x.id === t.slice(2)); if (!f || !fvis(f)) return switchTab('home'); _sw('feature'); $('feature-view').innerHTML = `<div class="bg-white rounded-2xl shadow border border-slate-200 p-6 sm:p-8"><h2 class="text-3xl font-bold text-navy-800 mb-4"><i class="fa-solid ${esc(f.icon)} text-emerald-600 mr-2"></i>${esc(f.title)}</h2><div class="text-slate-700 leading-relaxed" style="white-space:pre-line">${esc(f.content)}</div></div>`; const n = $('nav-' + t); if (n) n.classList.add('text-emerald-600','border-b-2','border-emerald-600'); return; }
+  _sw(t); if (t === 'dashboard') dashTab(curTab); if (t === 'council') renderCouncil();
+};
+
+/* লগইন / লগআউট */
+function togglePasswordFieldVisibility() {}
+async function handleLoginSubmit(e) {
+  e.preventDefault();
+  const id = $('login-user-id').value.trim().toLowerCase(), h = await H($('login-password').value), er = $('login-error-msg');
+  const u = cfg.users.find(x => x.id.toLowerCase() === id && x.hash === h && x.active !== 0);
+  if (!u) { er.textContent = 'ইউজার আইডি বা পাসওয়ার্ড ভুল। ভুলে গেলে সুপার অ্যাডমিনকে রিসেট করতে বলুন।'; er.classList.remove('hidden'); return; }
+  const r = cfg.roles.find(x => x.key === u.role);
+  currentUser = {role:u.role,uid:u.id,name:u.name + (r ? ` (${r.name})` : '')};
+  log('লগইন'); saveData(); saveCfg(true); updateUserUI(); closeLoginModal(); renderDashboard(); switchTab('dashboard');
+}
+function logout() { currentUser = {role:'visitor',name:'সাধারণ সদস্য/দর্শনার্থী'}; saveData(); updateUserUI(); switchTab('home'); }
+function updateUserUI() {
+  const v = currentUser.role === 'visitor', r = cfg.roles.find(x => x.key === currentUser.role);
+  $('current-user-name').textContent = currentUser.name;
+  $('login-btn-text').textContent = v ? 'লগইন' : 'লগআউট';
+  $('login-btn-text').parentElement.onclick = v ? openLoginModal : logout;
+  $('dash-role-badge').textContent = r ? r.name : 'দর্শনার্থী';
+  $('dash-role-title').textContent = r ? (r.perms.length ? r.perms.length + 'টি অনুমতি সক্রিয়' : 'রিড-অনলি ভিউ') : '';
+  $('dash-welcome-text').textContent = 'স্বাগতম, ' + currentUser.name;
+  applyCfg();
+}
+function renderAll() { renderHomeNotices(); renderNotices(); renderDashboard(); if (!$('admin-panels').classList.contains('hidden')) dashTab(curTab); }
+window.onload = async function () { await initCfg(); updateUserUI(); renderAll(); loadRemoteData(); };
+
+/* প্যানেল ট্যাব */
+const TABS = [['apps','আবেদন','fa-list-check',null],['notice','নোটিশ','fa-bullhorn','post_notice'],['users','আইডি/ব্যবহারকারী','fa-users','manage_users'],['roles','পদবী ও অনুমতি','fa-user-shield','manage_roles'],['feat','ফিচার/পেজ','fa-puzzle-piece','manage_features'],['cats','ক্যাটাগরি','fa-tags','manage_categories'],['site','সাইট সেটিংস','fa-gear','manage_settings'],['log','লগ ও ব্যাকআপ','fa-clock-rotate-left','view_log']];
+function buildTabs() { $('dash-tabs').innerHTML = TABS.filter(t => !t[3] || can(t[3])).map(t => `<button onclick="dashTab('${t[0]}')" class="px-3 py-2 rounded-lg text-sm font-semibold border ${t[0] === curTab ? 'bg-navy-800 text-white' : 'bg-white text-slate-700'}"><i class="fa-solid ${t[2]} mr-1"></i>${t[1]}</button>`).join(''); }
+function dashTab(t) {
+  const a = TABS.find(x => x[0] === t); if (!a || (a[3] && !can(a[3]))) t = 'apps';
+  curTab = t; buildTabs();
+  $('dash-apps').classList.toggle('hidden', t !== 'apps'); $('admin-panels').classList.toggle('hidden', t === 'apps');
+  if (t !== 'apps') $('admin-panels').innerHTML = P[t]();
+}
+const I = (id, l, v = '', t = 'text') => `<label class="block text-xs font-bold text-slate-600">${l}<input id="${id}" type="${t}" value="${esc(v)}" class="w-full mt-1 px-3 py-2 border rounded-lg text-sm font-normal"></label>`;
+const card = (h, b) => `<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-6"><h3 class="font-bold text-navy-800 mb-3">${h}</h3>${b}</div>`;
+const BTN = (f, t, c = 'emerald') => `<button onclick="${f}" class="bg-${c}-600 hover:bg-${c}-700 text-white text-sm font-bold px-4 py-2 rounded-lg">${t}</button>`;
+const SEL = (id, l, opts, sel) => `<label class="block text-xs font-bold text-slate-600">${l}<select id="${id}" class="w-full mt-1 px-3 py-2 border rounded-lg text-sm font-normal">${opts.map(o => `<option value="${esc(o[0])}" ${o[0] === sel ? 'selected' : ''}>${esc(o[1])}</option>`).join('')}</select></label>`;
+const P = {};
+
+P.notice = () => card('সরাসরি নোটিশ প্রকাশ', `<div class="space-y-3">${I('n-title','শিরোনাম')}${SEL('n-cat','ক্যাটাগরি',[...cfg.cats,'সাধারণ নোটিশ'].map(c => [c,c]))}<label class="block text-xs font-bold text-slate-600">বিবরণ<textarea id="n-body" rows="4" class="w-full mt-1 px-3 py-2 border rounded-lg text-sm font-normal"></textarea></label>${BTN('postNotice()','প্রকাশ করুন')}</div>`) + card('প্রকাশিত নোটিশ', notices.map(n => `<div class="flex justify-between border-b py-2 text-sm"><span>${esc(n.title)}</span><button onclick="delNotice('${esc(n.id)}')" class="text-red-500 text-xs font-bold">মুছুন</button></div>`).join('') || 'কোনো নোটিশ নেই');
+function postNotice() {
+  const t = $('n-title').value.trim(), b = $('n-body').value.trim(); if (!t || !b) return alert('শিরোনাম ও বিবরণ দিন।');
+  const r = cfg.roles.find(x => x.key === currentUser.role);
+  const n = {id:'NOT-' + Math.floor(1000 + Math.random() * 9000),title:t,category:$('n-cat').value,date:new Date().toISOString().split('T')[0],content:b,publisher:r ? r.name : 'প্রশাসন',local:1};
+  notices.unshift(n); log('নোটিশ প্রকাশ: ' + t); saveData(); saveCfg(true); renderAll(); dashTab('notice');
+  if (BACKEND_ENABLED) postToBackend({action:'add_notice',notice:n,actor:currentUser.name}).catch(() => {});
+}
+function delNotice(id) { if (!can('post_notice') || !confirm('নোটিশটি মুছবেন?')) return; notices = notices.filter(n => n.id !== id); log('নোটিশ মোছা: ' + id); saveData(); saveCfg(true); renderAll(); if (BACKEND_ENABLED) postToBackend({action:'delete_notice', id, actor: currentUser.name}).catch(() => {}); }
+
+P.users = () => card('নতুন আইডি খুলুন', `<div class="grid sm:grid-cols-4 gap-3">${I('u-name','নাম')}${I('u-id','ইউজার আইডি (ইংরেজিতে)')}${I('u-pass','পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)')}${SEL('u-role','পদবী',cfg.roles.filter(canAssign).map(r => [r.key,r.name]))}</div><div class="mt-3">${BTN('addUser()','আইডি তৈরি করুন')} ${BTN('genFill()','অটো আইডি-পাসওয়ার্ড','blue')}</div>`)
+  + card('সকল আইডি', `<div class="overflow-x-auto"><table class="w-full text-sm text-left"><tr class="text-xs text-slate-500"><th class="p-2">নাম</th><th>আইডি</th><th>পদবী</th><th>অবস্থা</th><th></th></tr>${cfg.users.map(u => { const r = cfg.roles.find(x => x.key === u.role); return `<tr class="border-t"><td class="p-2 font-bold">${esc(u.name)}</td><td class="font-mono text-xs">${esc(u.id)}</td><td>${esc(r ? r.name : '?')}</td><td>${u.active === 0 ? 'বন্ধ' : 'সচল'}</td><td class="text-right space-x-2">${canManage(u) ? `<button onclick="userAct('${esc(u.id)}','pw')" class="text-blue-600 text-xs font-bold">পাসওয়ার্ড</button><button onclick="userAct('${esc(u.id)}','tog')" class="text-amber-600 text-xs font-bold">${u.active === 0 ? 'চালু' : 'বন্ধ'}</button><button onclick="userAct('${esc(u.id)}','del')" class="text-red-600 text-xs font-bold">মুছুন</button>` : ''}</td></tr>`; }).join('')}</table></div>`);
+async function addUser() {
+  const n = $('u-name').value.trim(), id = $('u-id').value.trim().toLowerCase(), p = $('u-pass').value, r = cfg.roles.find(x => x.key === $('u-role').value);
+  if (!n || !id || p.length < 6) return alert('নাম, আইডি ও কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড দিন।');
+  if (!/^[a-z0-9_.-]+$/.test(id)) return alert('আইডিতে শুধু ইংরেজি ছোট অক্ষর, সংখ্যা, _ . - ব্যবহার করুন।');
+  if (cfg.users.some(u => u.id === id)) return alert('এই আইডি আগেই আছে।');
+  if (!r || !canAssign(r)) return alert('এই পদবী দেওয়ার অনুমতি নেই।');
+  cfg.users.push({id,name:n,role:r.key,hash:await H(p),plain:p,active:1}); log('নতুন আইডি: ' + id); saveCfg(); dashTab('users'); prompt('আইডি / পাসওয়ার্ড (কপি করুন):', id + ' / ' + p);
+}
+async function userAct(id, a) {
+  const u = cfg.users.find(x => x.id === id); if (!u || !canManage(u)) return;
+  const lastAdmin = u.role === 'admin' && u.active !== 0 && cfg.users.filter(x => x.role === 'admin' && x.active !== 0).length < 2;
+  if (a === 'pw') { let p = prompt('নতুন পাসওয়ার্ড লিখুন (ফাঁকা রাখলে অটো-জেনারেট হবে):'); if (p === null) return; if (!p) { p = genPass(); prompt('অটো-জেনারেট পাসওয়ার্ড (কপি করে দিন):', p); } if (p.length < 6) return alert('কমপক্ষে ৬ অক্ষর দিন।'); u.hash = await H(p); u.plain = p; }
+  if (a === 'tog') { if (u.id === currentUser.uid || lastAdmin) return alert('এই আইডি বন্ধ করা যাবে না।'); u.active = u.active === 0 ? 1 : 0; }
+  if (a === 'del') { if (u.id === currentUser.uid || lastAdmin) return alert('এই আইডি মোছা যাবে না।'); if (!confirm(id + ' আইডি মুছবেন?')) return; cfg.users = cfg.users.filter(x => x !== u); }
+  log(a + ': ' + id); saveCfg(); dashTab('users');
+}
+
+P.roles = () => card('নতুন পদবী যোগ করুন', `<div class="flex gap-3 items-end">${I('r-name','পদবীর নাম (যেমন: কোষাধ্যক্ষ)')}${BTN('addRole()','যোগ করুন')}</div>`)
+  + card('পদবী ও অনুমতি', cfg.roles.map(r => `<div class="border rounded-xl p-4 mb-3"><div class="flex justify-between items-center mb-2"><input value="${esc(r.name)}" ${r.sys ? 'disabled' : ''} onchange="renameRole('${r.key}',this.value)" class="font-bold border rounded px-2 py-1">${r.sys ? '<span class="text-xs text-slate-500">লক করা (সব অনুমতি)</span>' : `<button onclick="delRole('${r.key}')" class="text-red-600 text-xs font-bold">মুছুন</button>`}</div><div class="grid sm:grid-cols-2 gap-1 text-xs">${Object.entries(ALLP).map(([p, l]) => `<label><input type="checkbox" ${r.perms.includes(p) ? 'checked' : ''} ${r.sys || !can(p) ? 'disabled' : ''} onchange="togglePerm('${r.key}','${p}',this.checked)"> ${l}</label>`).join('')}</div></div>`).join(''));
+function addRole() { const n = $('r-name').value.trim(); if (!n) return; cfg.roles.push({key:'r' + Date.now().toString(36),name:n,perms:[]}); log('নতুন পদবী: ' + n); saveCfg(); dashTab('roles'); }
+function renameRole(k, v) { const r = cfg.roles.find(x => x.key === k); if (r && v.trim() && !r.sys) { r.name = v.trim(); saveCfg(); } }
+function togglePerm(k, p, on) { const r = cfg.roles.find(x => x.key === k); if (!r || r.sys || !can(p)) return; r.perms = on ? [...new Set([...r.perms, p])] : r.perms.filter(x => x !== p); log(`অনুমতি ${p}=${on}: ${r.name}`); saveCfg(); }
+function delRole(k) { const r = cfg.roles.find(x => x.key === k); if (!r || r.sys) return; if (cfg.users.some(u => u.role === k)) return alert('এই পদবীতে আইডি আছে, আগে সেগুলোর পদবী বদলান।'); cfg.roles = cfg.roles.filter(x => x !== r); log('পদবী মোছা: ' + r.name); saveCfg(); dashTab('roles'); }
+
+P.feat = () => { const f = editF || {type:'page',vis:'public',icon:'fa-star',nav:true,home:true};
+  return card(editF ? 'ফিচার সম্পাদনা' : 'নতুন ফিচার/পেজ যোগ করুন', `<div class="grid sm:grid-cols-2 gap-3">${I('f-title','শিরোনাম',f.title || '')}${SEL('f-icon','আইকন',Object.entries(ICONS),f.icon)}${SEL('f-type','ধরন',[['page','নিজস্ব পেজ (লেখা)'],['link','বাইরের লিংক']],f.type)}${SEL('f-vis','কারা দেখবে',[['public','সবাই'],['members','শুধু লগইন করা সদস্য']],f.vis)}</div><div class="mt-3">${I('f-url','লিংক URL (শুধু লিংক ধরনের জন্য)',f.url || '')}</div><label class="block text-xs font-bold text-slate-600 mt-3">পেজের বিষয়বস্তু<textarea id="f-content" rows="5" class="w-full mt-1 px-3 py-2 border rounded-lg text-sm font-normal">${esc(f.content || '')}</textarea></label><div class="flex gap-5 text-sm my-3"><label><input type="checkbox" id="f-nav" ${f.nav ? 'checked' : ''}> মেনুতে দেখাবে</label><label><input type="checkbox" id="f-home" ${f.home ? 'checked' : ''}> হোমপেজে কার্ড</label></div>${BTN('saveFeat()', editF ? 'আপডেট করুন' : 'যোগ করুন')}`)
+  + card('বর্তমান ফিচার', cfg.features.map(x => `<div class="flex justify-between items-center border-b py-2 text-sm"><span><i class="fa-solid ${esc(x.icon)} text-emerald-600 mr-2"></i>${esc(x.title)} <span class="text-xs text-slate-400">(${x.type === 'link' ? 'লিংক' : 'পেজ'})</span></span><span class="space-x-3 text-xs font-bold"><button onclick="featAct('${x.id}','up')">↑</button><button onclick="featAct('${x.id}','edit')" class="text-blue-600">সম্পাদনা</button><button onclick="featAct('${x.id}','del')" class="text-red-600">মুছুন</button></span></div>`).join('') || 'এখনো কোনো ফিচার যোগ হয়নি'); };
+function saveFeat() {
+  const t = $('f-title').value.trim(), type = $('f-type').value, url = $('f-url').value.trim(); if (!t) return alert('শিরোনাম দিন।');
+  if (type === 'link' && !/^https?:\/\//i.test(url)) return alert('লিংক http:// বা https:// দিয়ে শুরু হতে হবে।');
+  const f = editF || {id:'x' + Date.now().toString(36)};
+  Object.assign(f, {title:t,icon:$('f-icon').value,type,url,content:$('f-content').value,vis:$('f-vis').value,nav:$('f-nav').checked,home:$('f-home').checked});
+  if (!editF) cfg.features.push(f); log('ফিচার সংরক্ষণ: ' + t); editF = null; saveCfg(); dashTab('feat');
+}
+function featAct(id, a) {
+  const i = cfg.features.findIndex(x => x.id === id); if (i < 0) return;
+  if (a === 'edit') { editF = cfg.features[i]; return dashTab('feat'); }
+  if (a === 'del') { if (!confirm('ফিচারটি মুছবেন?')) return; cfg.features.splice(i, 1); log('ফিচার মোছা'); }
+  if (a === 'up' && i > 0) [cfg.features[i - 1], cfg.features[i]] = [cfg.features[i], cfg.features[i - 1]];
+  saveCfg(); dashTab('feat');
+}
+
+P.cats = () => card('ক্যাটাগরি (আবেদন ও নোটিশে ব্যবহৃত)', `<div class="flex gap-3 items-end mb-4">${I('c-new','নতুন ক্যাটাগরি')}${BTN('addCat()','যোগ করুন')}</div><div class="flex flex-wrap gap-2">${cfg.cats.map((c, i) => `<span class="bg-slate-100 px-3 py-1 rounded-full text-sm">${esc(c)} <button onclick="delCat(${i})" class="text-red-500 ml-1 font-bold">×</button></span>`).join('')}</div>`);
+function addCat() { const c = $('c-new').value.trim(); if (!c || cfg.cats.includes(c)) return; cfg.cats.push(c); log('ক্যাটাগরি: ' + c); saveCfg(); dashTab('cats'); }
+function delCat(i) { if (!confirm('ক্যাটাগরি মুছবেন? (পুরনো আবেদন/নোটিশ অপরিবর্তিত থাকবে)')) return; cfg.cats.splice(i, 1); saveCfg(); dashTab('cats'); }
+
+P.site = () => { const s = cfg.site; return card('সাইটের তথ্য', `<div class="grid sm:grid-cols-2 gap-3">${I('s-name','সংস্থার নাম',s.name)}${I('s-tagline','ট্যাগলাইন',s.tagline)}${I('s-address','ঠিকানা',s.address)}${I('s-email','ইমেইল',s.email)}${I('s-phone','ফোন',s.phone)}${I('s-about','ফুটারের পরিচিতি',s.about)}</div><div class="mt-3">${BTN('saveSite()','সংরক্ষণ করুন')}</div>`)
+  + card('লোগো', `<input type="file" accept="image/*" onchange="setLogo(this)" class="text-sm"> <span class="text-xs text-slate-500">সর্বোচ্চ ৩০০ KB</span> ${s.logo ? BTN('removeLogo()','ডিফল্ট লোগো ফেরান','red') : ''}`); };
+function saveSite() { const s = cfg.site; ['name','tagline','address','email','phone','about'].forEach(k => s[k] = $('s-' + k).value.trim() || s[k]); log('সাইট সেটিংস আপডেট'); saveCfg(); alert('সংরক্ষিত হয়েছে।'); }
+function setLogo(inp) { const f = inp.files[0]; if (!f) return; if (f.size > 300 * 1024) return alert('লোগো ৩০০ KB-এর কম হতে হবে।'); const r = new FileReader(); r.onload = () => { cfg.site.logo = r.result; log('লোগো পরিবর্তন'); saveCfg(); dashTab('site'); }; r.readAsDataURL(f); }
+function removeLogo() { cfg.site.logo = ''; saveCfg(); location.reload(); }
+
+P.log = () => card('ব্যাকআপ ও ট্রান্সফার', `<div class="flex gap-3 flex-wrap">${BTN('exportCfg()','ব্যাকআপ ডাউনলোড (JSON)')}<label class="bg-navy-800 text-white text-sm font-bold px-4 py-2 rounded-lg cursor-pointer">ব্যাকআপ ইমপোর্ট<input type="file" accept=".json" class="hidden" onchange="importCfg(this)"></label></div><p class="text-xs text-slate-500 mt-2">অন্য ডিভাইস/ব্রাউজারে একই আইডি ও সেটিংস চালু করতে ব্যাকআপ নিয়ে সেখানে ইমপোর্ট করুন।</p>`)
+  + card('কার্যকলাপ লগ', cfg.log.map(l => `<div class="text-xs border-b py-1"><b>${esc(l.t)}</b> — ${esc(l.u)} — ${esc(l.m)}</div>`).join('') || 'কিছু নেই');
+function exportCfg() { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(cfg)], {type:'application/json'})); a.download = 'nabatarun-backup.json'; a.click(); }
+function importCfg(inp) {
+  const f = inp.files[0]; if (!f || currentUser.role !== 'admin') return;
+  const r = new FileReader();
+  r.onload = () => { try { const c = JSON.parse(r.result); if (!Array.isArray(c.roles) || !Array.isArray(c.users) || !c.users.some(u => u.role === 'admin')) throw 0; cfg = c; log('ব্যাকআপ ইমপোর্ট'); saveCfg(true); alert('ইমপোর্ট সফল। পেজ রিলোড হচ্ছে।'); location.reload(); } catch (e) { alert('ফাইলটি সঠিক ব্যাকআপ নয়।'); } };
+  r.readAsText(f);
+}
+
+</script>
+<script>
+/* ===== ২য় আপডেট: সদস্যপদ ফরম, ভোটাভুটি, পরিষদ, অটো আইডি-পাসওয়ার্ড ===== */
+ALLP.open_vote = 'ভোটাভুটি চালু/বন্ধ করা'; ALLP.manage_council = 'পরিষদ ব্যবস্থাপনা';
+TABS.splice(1, 0, ['vote','ভোটাভুটি','fa-check-to-slot',null]); TABS.push(['council','পরিষদ ব্যবস্থাপনা','fa-people-roof','manage_council']);
+function migrate() {
+  if (cfg.v2) return; cfg.v2 = 1; cfg.votes = cfg.votes || []; cfg.council = cfg.council || {name:'কার্যনির্বাহী পরিষদ',members:[]};
+  [['finance','অর্থ সম্পাদক'],['env','পরিবেশ সম্পাদক'],['edu','শিক্ষা সম্পাদক'],['social','সমাজকল্যাণ সম্পাদক'],['exec','কার্যনির্বাহী সদস্য']].forEach(([k, n]) => { if (!cfg.roles.some(r => r.key === k)) cfg.roles.push({key:k,name:n,perms:[]}); });
+  const p = cfg.roles.find(r => r.key === 'president'); if (p && !p.perms.includes('open_vote')) p.perms.push('open_vote');
+}
+const rnd = (s, n) => Array.from(crypto.getRandomValues(new Uint32Array(n)), x => s[x % s.length]).join('');
+const genPass = () => rnd('ABCDEFGHJKLMNPQRSTUVWXYZ', 2) + rnd('abcdefghjkmnpqrstuvwxyz', 4) + rnd('23456789', 3) + rnd('@#!', 1);
+function genId(k) { let i; do { i = (k || 'm').replace(/[^a-z]/g, '').slice(0, 5) + rnd('0123456789', 4); } while (cfg.users.some(u => u.id === i)); return i; }
+function genFill() { $('u-id').value = genId($('u-role').value); $('u-pass').value = genPass(); }
+function imgResize(f, max, cb) { if (!f) return; const r = new FileReader(); r.onload = () => { const i = new Image(); i.onload = () => { const k = Math.min(1, max / Math.max(i.width, i.height)), c = document.createElement('canvas'); c.width = i.width * k; c.height = i.height * k; c.getContext('2d').drawImage(i, 0, 0, c.width, c.height); cb(c.toDataURL('image/jpeg', .8)); }; i.src = r.result; }; r.readAsDataURL(f); }
+
+/* সদস্যপদ আবেদন ফরম */
+function toggleMember() { const on = $('application-category').value.includes('সদস্যপদ'); $('member-extra').classList.toggle('hidden', !on); ['m-name-en','m-father','m-nid','m-present','m-permanent'].forEach(i => $(i).required = on); $('application-details').required = !on; }
+function collectMember() { if (!$('application-category').value.includes('সদস্যপদ')) return null; return {nameEn:$('m-name-en').value.trim(),father:$('m-father').value.trim(),nid:$('m-nid').value.trim(),present:$('m-present').value.trim(),permanent:$('m-permanent').value.trim(),photo:window.mPhoto || ''}; }
+$('application-category').addEventListener('change', toggleMember);
+$('application-form').addEventListener('reset', () => { window.mPhoto = ''; $('m-preview').classList.add('hidden'); setTimeout(toggleMember); });
+
+/* আবেদনের বিস্তারিত + তিন ধাপের অনুমতি */
+const tally = v => { const c = {yes:0,no:0,abs:0}; Object.values(v.votes).forEach(x => c[x]++); return c; };
+function viewApp(id) {
+  const a = applications.find(x => x.id === id); if (!a) return; const m = a.member;
+  const row = (l, s) => `<div class="flex justify-between border-b py-2 text-sm"><span>${l}</span><span class="font-bold text-xs px-2 py-0.5 rounded border ${getApprovalBadgeClass(s)}">${getApprovalStatusText(s)}</span></div>`;
+  $('app-modal-body').innerHTML = `<div class="flex justify-between mb-3"><h3 class="font-bold text-lg text-navy-800">${esc(a.id)} — ${esc(a.category)}</h3><button onclick="$('app-modal').classList.add('hidden')" class="text-slate-400"><i class="fa-solid fa-xmark text-xl"></i></button></div>${m && m.photo ? `<img src="${esc(m.photo)}" class="w-28 h-28 object-cover rounded-xl border mb-3">` : ''}<div class="text-sm space-y-1 mb-4"><p>নাম (বাংলা): <b>${esc(a.name)}</b></p>${m ? `<p>Name (English): <b>${esc(m.nameEn)}</b></p><p>পিতার নাম: <b>${esc(m.father)}</b></p><p>NID নম্বর: <b>${esc(m.nid)}</b></p><p>বর্তমান ঠিকানা: ${esc(m.present)}</p><p>স্থায়ী ঠিকানা: ${esc(m.permanent)}</p>` : ''}<p>মোবাইল: ${esc(a.phone)}</p><p class="text-slate-600">${esc(a.details)}</p></div>${row('সভাপতির অনুমতি', a.presidentApproval)}${row('সাধারণ সম্পাদকের অনুমতি', a.secretaryApproval)}${row('দপ্তর সম্পাদক (প্রকাশনা)', a.isPublished ? 'APPROVED' : 'PENDING')}${m && a.presidentApproval === 'APPROVED' && a.secretaryApproval === 'APPROVED' ? `<button onclick="memberCard('${a.id}')" class="mt-3 bg-navy-800 text-white text-xs font-bold px-3 py-2 rounded-lg"><i class="fa-solid fa-id-card"></i> সদস্য কার্ড প্রিন্ট</button>` : ''}${cfg.votes.filter(v => v.appId === id && !v.open && canSeeResult()).map(v => { const c = tally(v); return `<p class="text-xs mt-3 bg-purple-50 border border-purple-200 rounded p-2">ভোটাভুটি (${v.open ? 'চলছে' : 'সমাপ্ত'}): পক্ষে ${c.yes} · বিপক্ষে ${c.no} · নিরপেক্ষ ${c.abs}</p>`; }).join('')}`;
+  $('app-modal').classList.remove('hidden');
+}
+
+/* ভোটাভুটি */
+P.vote = () => { const op = can('open_vote');
+  return (op ? card('নতুন ভোটাভুটি শুরু করুন', `<div class="space-y-3">${I('v-title','বিষয়')}${I('v-desc','বিস্তারিত (ঐচ্ছিক)')}${BTN('newVote()','ভোট চালু করুন')}<p class="text-xs text-slate-500">আবেদনের তালিকা থেকেও ভোট আইকনে চাপ দিয়ে ভোট চালু করা যায়।</p></div>`) : '')
+  + card('ভোটাভুটি', cfg.votes.map(v => { const c = tally(v), my = v.votes[currentUser.uid];
+    return `<div class="border rounded-xl p-4 mb-3"><div class="flex justify-between"><b>${esc(v.title)}</b><span class="text-xs font-bold ${v.open ? 'text-emerald-600' : 'text-slate-500'}">${v.open ? 'চলছে' : 'সমাপ্ত'}</span></div><p class="text-xs text-slate-500">${esc(v.desc || '')} শুরু: ${esc(v.by)}, ${esc(v.date)}</p><div class="my-2 text-sm">পক্ষে <b>${c.yes}</b> · বিপক্ষে <b>${c.no}</b> · নিরপেক্ষ <b>${c.abs}</b> <span class="text-xs text-slate-400">(ভোট দিয়েছেন ${Object.keys(v.votes).length}/${cfg.users.filter(u => u.active !== 0).length} জন)</span></div>${v.open ? `<div class="space-x-2">${[['yes','পক্ষে','emerald'],['no','বিপক্ষে','red'],['abs','নিরপেক্ষ','slate']].map(o => `<button onclick="castVote('${v.id}','${o[0]}')" class="bg-${o[2]}-${my === o[0] ? '800' : '600'} text-white text-xs font-bold px-3 py-1.5 rounded-lg">${o[1]}${my === o[0] ? ' ✓' : ''}</button>`).join('')}</div>` : `<p class="text-sm font-bold">ফলাফল: ${c.yes > c.no ? 'পক্ষে সিদ্ধান্ত' : c.yes < c.no ? 'বিপক্ষে সিদ্ধান্ত' : 'সমান সমান'}</p>`}${op && v.open ? `<button onclick="closeVote('${v.id}')" class="text-xs text-red-600 font-bold mt-2">ভোট বন্ধ করুন</button>` : ''}</div>`; }).join('') || 'এখন কোনো ভোটাভুটি নেই'); };
+function newVote() { const t = $('v-title').value.trim(); if (!can('open_vote') || !t) return; cfg.votes.unshift({id:'v' + Date.now().toString(36),title:t,desc:$('v-desc').value.trim(),open:1,votes:{},by:currentUser.name,date:new Date().toISOString().split('T')[0]}); log('ভোট চালু: ' + t); saveCfg(true); dashTab('vote'); }
+function startVote(id) { if (!can('open_vote')) return; const a = applications.find(x => x.id === id); if (!a) return; if (cfg.votes.some(v => v.appId === id && v.open)) return alert('এই আবেদনে ভোটাভুটি আগেই চালু আছে।'); cfg.votes.unshift({id:'v' + Date.now().toString(36),appId:id,title:`${a.id} (${a.name}) — ${a.category}: গ্রহণ করা হবে কি?`,desc:'',open:1,votes:{},by:currentUser.name,date:new Date().toISOString().split('T')[0]}); log('ভোট চালু: ' + id); saveCfg(true); dashTab('vote'); }
+function castVote(id, c) { const v = cfg.votes.find(x => x.id === id); if (!v || !v.open || !currentUser.uid) return; v.votes[currentUser.uid] = c; saveCfg(true); dashTab('vote'); }
+function closeVote(id) { const v = cfg.votes.find(x => x.id === id); if (!v || !can('open_vote')) return; v.open = 0; log('ভোট বন্ধ: ' + v.title); saveCfg(true); dashTab('vote'); }
+
+/* পরিষদ */
+function renderCouncil() { const c = cfg.council;
+  $('council-view').innerHTML = `<div class="text-center mb-8"><h2 class="text-3xl font-bold text-navy-800">${esc(c.name)}</h2><p class="text-slate-500 text-sm mt-1">${esc(cfg.site.name)}</p></div><div class="grid grid-cols-2 md:grid-cols-4 gap-5">${c.members.map(m => `<div class="bg-white rounded-2xl border shadow-sm p-4 text-center">${m.photo ? `<img src="${esc(m.photo)}" class="w-24 h-24 rounded-full object-cover mx-auto mb-3 border-2 border-emerald-500">` : '<div class="w-24 h-24 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-3xl mx-auto mb-3"><i class="fa-solid fa-user"></i></div>'}<h4 class="font-bold text-navy-800">${esc(m.name)}</h4><p class="text-xs text-emerald-600 font-semibold">${esc(m.position)}</p></div>`).join('') || '<p class="col-span-full text-center text-slate-500">এখনো কোনো সদস্য যুক্ত হয়নি।</p>'}</div>`; }
+P.council = () => { const c = cfg.council;
+  return card('পরিষদের নাম', `<div class="flex gap-3 items-end">${I('cn-name','পরিষদের নাম',c.name)}${BTN('saveCouncilName()','সংরক্ষণ')}</div>`)
+  + card('পরিষদে নতুন সদস্য যুক্ত করুন', `<div class="grid sm:grid-cols-2 gap-3">${I('cm-name','নাম')}<label class="block text-xs font-bold text-slate-600">পদবী (তালিকা থেকে বাছুন বা নতুন লিখুন)<input id="cm-pos" list="pos-list" class="w-full mt-1 px-3 py-2 border rounded-lg text-sm font-normal"><datalist id="pos-list">${cfg.roles.filter(r => !r.sys).map(r => `<option value="${esc(r.name)}">`).join('')}</datalist></label></div><div class="my-3 text-xs font-bold text-slate-600">ছবি: <input type="file" accept="image/*" class="font-normal" onchange="imgResize(this.files[0],320,d=>window.cPhoto=d)"></div><label class="text-sm"><input type="checkbox" id="cm-login" checked> লগইন আইডি ও পাসওয়ার্ড অটো-জেনারেট করুন</label><div class="mt-3">${BTN('addCouncilMember()','যুক্ত করুন')}</div>`)
+  + card('পরিষদ সদস্য তালিকা', c.members.map((m, i) => `<div class="flex items-center gap-3 border-b py-2 text-sm">${m.photo ? `<img src="${esc(m.photo)}" class="w-10 h-10 rounded-full object-cover">` : '<span class="w-10 h-10 rounded-full bg-slate-200 inline-flex items-center justify-center"><i class="fa-solid fa-user"></i></span>'}<span class="flex-grow"><b>${esc(m.name)}</b> <span class="text-xs text-slate-500">${esc(m.position)}${m.uid ? ' · আইডি: ' + esc(m.uid) : ''}</span></span><span class="space-x-3 text-xs font-bold"><button onclick="cmAct(${i},'up')">↑</button>${m.uid ? `<button onclick="cmAct(${i},'pw')" class="text-blue-600">পাসওয়ার্ড রিসেট</button>` : ''}<button onclick="cmAct(${i},'del')" class="text-red-600">মুছুন</button></span></div>`).join('') || 'কেউ নেই'); };
+function saveCouncilName() { const n = $('cn-name').value.trim(); if (!n) return; cfg.council.name = n; log('পরিষদের নাম: ' + n); saveCfg(); alert('সংরক্ষিত হয়েছে।'); }
+async function addCouncilMember() {
+  const n = $('cm-name').value.trim(), pos = $('cm-pos').value.trim(); if (!n || !pos) return alert('নাম ও পদবী দিন।');
+  let r = cfg.roles.find(x => x.name === pos); if (!r) { r = {key:'r' + Date.now().toString(36),name:pos,perms:[]}; cfg.roles.push(r); log('নতুন পদবী: ' + pos); }
+  const m = {id:'m' + Date.now().toString(36),name:n,position:pos,photo:window.cPhoto || ''}; let cred = '';
+  if ($('cm-login').checked && r.key !== 'admin') { const id = genId(r.key), pw = genPass(); cfg.users.push({id,name:n,role:r.key,hash:await H(pw),plain:pw,active:1}); m.uid = id; cred = id + ' / ' + pw; }
+  cfg.council.members.push(m); window.cPhoto = ''; log('পরিষদ সদস্য যুক্ত: ' + n); saveCfg(); dashTab('council');
+  if (cred) prompt('লগইন আইডি / পাসওয়ার্ড — এখনই কপি করে সদস্যকে দিন (পরে রিসেট করা যাবে):', cred);
+}
+async function cmAct(i, a) {
+  const m = cfg.council.members[i]; if (!m) return;
+  if (a === 'up' && i > 0) { const l = cfg.council.members; [l[i - 1], l[i]] = [l[i], l[i - 1]]; }
+  if (a === 'del') { if (!confirm(m.name + ' কে তালিকা থেকে সরাবেন? (আইডি বহাল থাকবে)')) return; cfg.council.members.splice(i, 1); }
+  if (a === 'pw') { const u = cfg.users.find(x => x.id === m.uid); if (!u) return; const pw = genPass(); u.hash = await H(pw); u.plain = pw; log('পাসওয়ার্ড রিসেট: ' + u.id); saveCfg(true); prompt('নতুন পাসওয়ার্ড (কপি করে সদস্যকে দিন):', pw); return; }
+  saveCfg(); dashTab('council');
+}
+
+</script>
+<script>
+/* ===== ৩য় আপডেট: ১৫ ভোটার, সময়সীমা, রেজাল্ট শিট, পাসওয়ার্ড ব্যবস্থাপনা, পরিসংখ্যান, আর্থিক খাতা, সদস্য কার্ড ===== */
+ALLP.manage_finance = 'আর্থিক খাতা';
+TABS.push(['stats','পরিসংখ্যান ও এক্সপোর্ট','fa-chart-column',null], ['fin','আর্থিক খাতা','fa-wallet','manage_finance'], ['me','আমার অ্যাকাউন্ট','fa-key',null]);
+function migrate3() {
+  if (cfg.v3) return; cfg.v3 = 1; cfg.ledger = cfg.ledger || [];
+  if (!cfg.roles.some(r => r.key === 'voter')) cfg.roles.push({key:'voter',name:'ভোটার সদস্য',perms:[]});
+  const f = cfg.roles.find(r => r.key === 'finance'); if (f && !f.perms.includes('manage_finance')) f.perms.push('manage_finance');
+}
+const MAXV = 15, today = () => new Date().toISOString().split('T')[0];
+const voters = () => { const f = cfg.users.filter(u => u.voter && u.active !== 0); return f.length ? f : cfg.users.filter(u => u.active !== 0); };
+const canSeeResult = () => currentUser.role === 'admin' || ['president','secretary'].includes(currentUser.role) || cfg.council.members.some(m => m.uid && m.uid === currentUser.uid);
+const canExport = () => can('view_log') || can('approve_first') || can('approve_second') || can('publish');
+
+/* ভোটাভুটি: সময়সীমা, ১৫ জন ভোটার, রেজাল্ট শিট */
+function closeV(v, auto) { v.open = 0; v.closedAt = Date.now(); v.auto = !!auto; }
+function checkVotes() { let ch = false; cfg.votes.forEach(v => { if (v.open && v.end && v.end <= Date.now()) { closeV(v, 1); ch = true; } }); if (ch) saveCfg(true); return ch; }
+setInterval(() => { if (cfg && checkVotes() && curTab === 'vote' && !$('admin-panels').classList.contains('hidden')) dashTab('vote'); }, 30000);
+function mkVote(t, d, h, appId) {
+  h = parseFloat(String(h).replace(/[০-৯]/g, x => '০১২৩৪৫৬৭৮৯'.indexOf(x))); if (!(h > 0)) return alert('কত ঘণ্টা ভোট চলবে তা সংখ্যায় দিন।');
+  cfg.votes.unshift({id:'v' + Date.now().toString(36),appId,title:t,desc:d,open:1,votes:{},voters:voters().map(u => u.id),by:currentUser.name,date:today(),end:Date.now() + h * 36e5});
+  log('ভোট চালু: ' + t); saveCfg(true); dashTab('vote');
+}
+function newVote() { const t = $('v-title').value.trim(); if (!can('open_vote') || !t) return; mkVote(t, $('v-desc').value.trim(), $('v-hrs').value, undefined); }
+function startVote(id) { if (!can('open_vote')) return; const a = applications.find(x => x.id === id); if (!a) return; if (cfg.votes.some(v => v.appId === id && v.open)) return alert('এই আবেদনে ভোটাভুটি আগেই চালু আছে।'); const h = prompt('কত ঘণ্টা ভোটাভুটি চলবে?', '24'); if (h === null) return; mkVote(`${a.id} (${a.name}) — ${a.category}: গ্রহণ করা হবে কি?`, '', h, id); }
+function castVote(id, c) { checkVotes(); const v = cfg.votes.find(x => x.id === id); if (!v || !v.open || !currentUser.uid) return dashTab('vote'); if (!voters().some(u => u.id === currentUser.uid)) return alert('আপনি ভোটার তালিকায় নেই।'); v.votes[currentUser.uid] = c; saveCfg(true); dashTab('vote'); }
+function closeVote(id) { const v = cfg.votes.find(x => x.id === id); if (!v || !can('open_vote')) return; closeV(v); log('ভোট বন্ধ: ' + v.title); saveCfg(true); dashTab('vote'); }
+async function genVoters() {
+  if (!can('manage_users')) return; const have = cfg.users.filter(u => u.voter).length, need = MAXV - have; if (need <= 0) return alert('১৫টি ভোটার আইডি আগেই আছে।');
+  if (!cfg.roles.some(r => r.key === 'voter')) cfg.roles.push({key:'voter',name:'ভোটার সদস্য',perms:[]});
+  let out = 'ভোটার — আইডি / পাসওয়ার্ড\n';
+  for (let i = 0; i < need; i++) { const id = genId('voter'), pw = genPass(), n = 'ভোটার ' + (have + i + 1); cfg.users.push({id,name:n,role:'voter',hash:await H(pw),plain:pw,active:1,voter:1}); out += `${n}: ${id} / ${pw}\n`; }
+  window.voterOut = out; log(`${need}টি ভোটার আইডি তৈরি`); saveCfg(); dashTab('vote');
+}
+function toggleVoter(id, on) { const u = cfg.users.find(x => x.id === id); if (!u || !can('manage_users')) return; if (on && cfg.users.filter(x => x.voter).length >= MAXV) { alert('সর্বোচ্চ ১৫ জন ভোটার রাখা যাবে।'); return dashTab('vote'); } u.voter = on ? 1 : 0; log(`ভোটার ${on ? 'যোগ' : 'বাদ'}: ${id}`); saveCfg(true); dashTab('vote'); }
+function sheet(v) {
+  const nm = id => { const u = cfg.users.find(x => x.id === id); return esc(u ? u.name : id); }, g = k => Object.keys(v.votes).filter(i => v.votes[i] === k), non = (v.voters || []).filter(i => !(i in v.votes));
+  const L = (t, a) => `<p class="mt-2"><b>${t} (${a.length}):</b> ${a.map(nm).join(', ') || '—'}</p>`, y = g('yes').length, n = g('no').length;
+  return `<div class="bg-slate-50 border rounded-xl p-4 mt-2 text-sm"><div id="sheet-${v.id}"><h4 class="font-bold text-navy-800">রেজাল্ট শিট — ${esc(v.title)}</h4><p class="text-xs text-slate-500">${v.auto ? 'সময় শেষে স্বয়ংক্রিয়ভাবে প্রকাশিত' : 'ভোট বন্ধ করে প্রকাশিত'}: ${new Date(v.closedAt || v.end).toLocaleString('bn-BD')}</p>${L('পক্ষে', g('yes'))}${L('বিপক্ষে', g('no'))}${L('নিরপেক্ষ', g('abs'))}${L('ভোট দেননি', non)}<p class="mt-3 font-bold text-base">ফলাফল: ${y > n ? 'প্রস্তাব গৃহীত' : y < n ? 'প্রস্তাব বাতিল' : 'সমান সমান'} (পক্ষে ${y}, বিপক্ষে ${n})</p></div><button onclick="printSheet('${v.id}')" class="mt-3 text-xs font-bold text-navy-800 border border-navy-800 rounded px-3 py-1"><i class="fa-solid fa-print"></i> প্রিন্ট</button></div>`;
+}
+function printSheet(id) { const w = window.open('', '_blank'); w.document.write('<meta charset="utf-8"><body style="font-family:sans-serif;padding:30px;line-height:1.7">' + $('sheet-' + id).innerHTML + '</body>'); w.document.close(); w.print(); }
+P.vote = () => { checkVotes();
+  const op = can('open_vote'), me = voters().some(u => u.id === currentUser.uid), cnt = cfg.users.filter(u => u.voter).length; let h = '';
+  if (can('manage_users')) h += card(`ভোটার তালিকা (সর্বোচ্চ ১৫ জন) — এখন ${cnt}/${MAXV}`, `<div class="mb-3">${BTN('genVoters()','অটো ভোটার আইডি তৈরি (১৫ পর্যন্ত)')}</div>${window.voterOut ? `<textarea readonly rows="8" class="w-full border rounded-lg p-2 text-xs font-mono mb-3">${esc(window.voterOut)}</textarea>` : ''}<div class="grid sm:grid-cols-3 gap-1 text-xs">${cfg.users.map(u => `<label><input type="checkbox" ${u.voter ? 'checked' : ''} onchange="toggleVoter('${esc(u.id)}',this.checked)"> ${esc(u.name)} (${esc(u.id)})</label>`).join('')}</div><p class="text-xs text-slate-500 mt-2">কাউকে ভোটার টিক না দিলে সব সচল আইডি ভোট দিতে পারবে।</p>`);
+  if (op) h += card('নতুন ভোটাভুটি শুরু করুন', `<div class="grid sm:grid-cols-3 gap-3">${I('v-title','বিষয়')}${I('v-desc','বিস্তারিত (ঐচ্ছিক)')}${I('v-hrs','কত ঘণ্টা চলবে','24','number')}</div><div class="mt-3">${BTN('newVote()','ভোট চালু করুন')}</div><p class="text-xs text-slate-500 mt-2">সময় শেষ হলে ফলাফল শিট নিজে থেকে প্রকাশিত হবে। শিট দেখতে পারবেন শুধু সভাপতি, সাধারণ সম্পাদক ও পরিষদ সদস্যরা।</p>`);
+  return h + card('ভোটাভুটি', cfg.votes.map(v => { const my = v.votes[currentUser.uid];
+    return `<div class="border rounded-xl p-4 mb-3"><div class="flex justify-between"><b>${esc(v.title)}</b><span class="text-xs font-bold ${v.open ? 'text-emerald-600' : 'text-slate-500'}">${v.open ? 'চলছে' : 'সমাপ্ত'}</span></div><p class="text-xs text-slate-500">${esc(v.desc || '')} শুরু: ${esc(v.by)}, ${esc(v.date)}${v.end ? ` · ${v.open ? 'শেষ হবে' : 'শেষ হয়েছে'}: ${new Date(v.open ? v.end : (v.closedAt || v.end)).toLocaleString('bn-BD')}` : ''}</p><p class="text-sm my-2">ভোট দিয়েছেন ${Object.keys(v.votes).length}/${(v.voters || []).length} জন</p>${v.open ? (me ? `<div class="space-x-2">${[['yes','পক্ষে','emerald'],['no','বিপক্ষে','red'],['abs','নিরপেক্ষ','slate']].map(o => `<button onclick="castVote('${v.id}','${o[0]}')" class="bg-${o[2]}-${my === o[0] ? '800' : '600'} text-white text-xs font-bold px-3 py-1.5 rounded-lg">${o[1]}${my === o[0] ? ' ✓' : ''}</button>`).join('')}</div>` : '<p class="text-xs text-amber-600">আপনি ভোটার তালিকায় নেই।</p>') + (op ? `<button onclick="closeVote('${v.id}')" class="text-xs text-red-600 font-bold mt-2 block">এখনই ভোট বন্ধ করুন</button>` : '') : (canSeeResult() ? sheet(v) : '<p class="text-xs text-slate-500">ফলাফল শিট শুধু সভাপতি, সাধারণ সম্পাদক ও পরিষদ সদস্যরা দেখতে পারবেন।</p>')}</div>`; }).join('') || 'এখন কোনো ভোটাভুটি নেই'); };
+
+/* আইডি ব্যবস্থাপনা: সুপার অ্যাডমিনের জন্য পাসওয়ার্ড দেখা, আইডি/নাম/পাসওয়ার্ড বদল */
+P.users = () => { const adm = currentUser.role === 'admin';
+  return card('নতুন আইডি খুলুন', `<div class="grid sm:grid-cols-4 gap-3">${I('u-name','নাম')}${I('u-id','ইউজার আইডি (ইংরেজিতে)')}${I('u-pass','পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)')}${SEL('u-role','পদবী',cfg.roles.filter(canAssign).map(r => [r.key, r.name]))}</div><div class="mt-3 space-x-2">${BTN('addUser()','আইডি তৈরি করুন')}${BTN('genFill()','অটো আইডি-পাসওয়ার্ড','blue')}</div>`)
+  + card('সকল আইডি', `<div class="overflow-x-auto"><table class="w-full text-sm text-left"><tr class="text-xs text-slate-500"><th class="p-2">নাম</th><th>আইডি</th>${adm ? '<th>পাসওয়ার্ড</th>' : ''}<th>পদবী</th><th>অবস্থা</th><th></th></tr>${cfg.users.map(u => { const r = cfg.roles.find(x => x.key === u.role), i = esc(u.id);
+    return `<tr class="border-t"><td class="p-2 font-bold">${esc(u.name)}${u.voter ? ' <span class="text-[10px] bg-purple-100 text-purple-700 px-1 rounded">ভোটার</span>' : ''}</td><td class="font-mono text-xs">${i}</td>${adm ? `<td class="font-mono text-xs">${u.plain ? `<span data-p="${esc(u.plain)}">••••••</span> <button onclick="showPw(this)" class="text-slate-500"><i class="fa-solid fa-eye"></i></button>` : '<span class="text-slate-400">নিজে বদলেছেন/অজানা — রিসেট করুন</span>'}</td>` : ''}<td>${esc(r ? r.name : '?')}</td><td>${u.active === 0 ? 'বন্ধ' : 'সচল'}</td><td class="text-right space-x-2 whitespace-nowrap">${canManage(u) ? `<button onclick="editUser('${i}','nm')" class="text-slate-600 text-xs font-bold">নাম</button><button onclick="editUser('${i}','id')" class="text-slate-600 text-xs font-bold">আইডি বদল</button><button onclick="userAct('${i}','pw')" class="text-blue-600 text-xs font-bold">পাসওয়ার্ড</button><button onclick="userAct('${i}','tog')" class="text-amber-600 text-xs font-bold">${u.active === 0 ? 'চালু' : 'বন্ধ'}</button><button onclick="userAct('${i}','del')" class="text-red-600 text-xs font-bold">মুছুন</button>` : ''}</td></tr>`; }).join('')}</table></div>`); };
+function showPw(b) { const s = b.previousElementSibling; s.textContent = s.textContent === '••••••' ? s.dataset.p : '••••••'; }
+function editUser(id, w) {
+  const u = cfg.users.find(x => x.id === id); if (!u || !canManage(u)) return;
+  if (w === 'nm') { const n = prompt('নতুন নাম:', u.name); if (!n || !n.trim()) return; u.name = n.trim(); cfg.council.members.forEach(m => { if (m.uid === id) m.name = u.name; }); }
+  if (w === 'id') {
+    const n = (prompt('নতুন ইউজার আইডি (ইংরেজিতে):', id) || '').trim().toLowerCase(); if (!n || n === id) return;
+    if (!/^[a-z0-9_.-]+$/.test(n)) return alert('আইডিতে শুধু ইংরেজি ছোট অক্ষর, সংখ্যা, _ . - চলবে।'); if (cfg.users.some(x => x.id === n)) return alert('এই আইডি আগেই আছে।');
+    u.id = n; cfg.council.members.forEach(m => { if (m.uid === id) m.uid = n; });
+    cfg.votes.forEach(v => { if (id in v.votes) { v.votes[n] = v.votes[id]; delete v.votes[id]; } if (v.voters) v.voters = v.voters.map(x => x === id ? n : x); });
+    if (currentUser.uid === id) { currentUser.uid = n; saveData(); }
+  }
+  log(`আইডি সম্পাদনা (${w}): ${id}`); saveCfg(); dashTab('users');
+}
+P.me = () => card('আমার পাসওয়ার্ড পরিবর্তন', `<p class="text-xs text-slate-500 mb-3">আপনার আইডি: <b>${esc(currentUser.uid)}</b></p><div class="grid sm:grid-cols-3 gap-3">${I('pw-old','বর্তমান পাসওয়ার্ড','','password')}${I('pw-new','নতুন পাসওয়ার্ড (৬+ অক্ষর)','','password')}${I('pw-new2','নতুন পাসওয়ার্ড আবার','','password')}</div><div class="mt-3">${BTN('changePw()','পাসওয়ার্ড বদলান')}</div><p class="text-xs text-slate-500 mt-3">নিজে বদলালে নতুন পাসওয়ার্ড শুধু আপনি জানবেন, সুপার অ্যাডমিনের তালিকায় আর দেখাবে না। ভুলে গেলে সুপার অ্যাডমিন রিসেট করে দিতে পারবেন।</p>`);
+async function changePw() {
+  const u = cfg.users.find(x => x.id === currentUser.uid); if (!u) return;
+  if (await H($('pw-old').value) !== u.hash) return alert('বর্তমান পাসওয়ার্ড ভুল।');
+  const n = $('pw-new').value; if (n.length < 6 || n !== $('pw-new2').value) return alert('নতুন পাসওয়ার্ড কমপক্ষে ৬ অক্ষর ও দুইবার একই হতে হবে।');
+  u.hash = await H(n); delete u.plain; log('নিজের পাসওয়ার্ড পরিবর্তন'); saveCfg(true); dashTab('me'); alert('পাসওয়ার্ড বদলানো হয়েছে।');
+}
+
+/* পরিসংখ্যান ও CSV */
+P.stats = () => { const cs = {}; applications.forEach(a => cs[a.category] = (cs[a.category] || 0) + 1); const mx = Math.max(1, ...Object.values(cs)), N = (l, v, c) => `<div class="bg-${c}-50 rounded-xl p-3 text-center"><p class="text-xs text-slate-600">${l}</p><b class="text-xl text-${c}-700">${v}</b></div>`;
+  return card('এক নজরে', `<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">${N('মোট আবেদন', applications.length, 'blue')}${N('দুই অনুমোদনই হয়েছে', applications.filter(a => a.presidentApproval === 'APPROVED' && a.secretaryApproval === 'APPROVED').length, 'emerald')}${N('বাতিল', applications.filter(a => a.presidentApproval === 'REJECTED' || a.secretaryApproval === 'REJECTED').length, 'red')}${N('পরিষদ সদস্য', cfg.council.members.length, 'purple')}</div>`)
+  + card('ক্যাটাগরি অনুযায়ী আবেদন', Object.entries(cs).map(([k, n]) => `<div class="mb-2 text-sm"><div class="flex justify-between"><span>${esc(k)}</span><b>${n}</b></div><div class="bg-slate-100 rounded h-2"><div class="bg-emerald-500 h-2 rounded" style="width:${n / mx * 100}%"></div></div></div>`).join('') || 'কোনো আবেদন নেই')
+  + (canExport() ? card('এক্সপোর্ট', `${BTN('exportCsv()','সব আবেদন CSV (Excel) ডাউনলোড')}<p class="text-xs text-slate-500 mt-2">NID ও ঠিকানাসহ সংবেদনশীল তথ্য থাকে, তাই ফাইলটি সাবধানে রাখুন।</p>`) : ''); };
+function exportCsv() {
+  if (!canExport()) return;
+  const rows = [['আইডি','তারিখ','নাম','ফোন','ধরন','সভাপতি','সাধারণ সম্পাদক','প্রকাশিত','English Name','পিতা','NID','বর্তমান ঠিকানা','স্থায়ী ঠিকানা']].concat(applications.map(a => { const m = a.member || {}; return [a.id, a.date, a.name, a.phone, a.category, getApprovalStatusText(a.presidentApproval), getApprovalStatusText(a.secretaryApproval), a.isPublished ? 'হ্যাঁ' : 'না', m.nameEn, m.father, m.nid, m.present, m.permanent]; }));
+  const csv = '\ufeff' + rows.map(r => r.map(c => '"' + String(c ?? '').replace(/"/g, '""') + '"').join(',')).join('\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'})); a.download = 'applications.csv'; a.click();
+}
+
+/* আর্থিক খাতা */
+P.fin = () => { const L = cfg.ledger, inn = L.filter(x => x.type === 'in').reduce((a, x) => a + x.amt, 0), out = L.filter(x => x.type === 'out').reduce((a, x) => a + x.amt, 0);
+  return card('আর্থিক সারসংক্ষেপ', `<div class="grid grid-cols-3 gap-3 text-center"><div class="bg-emerald-50 rounded-xl p-3"><p class="text-xs">মোট আয়</p><b class="text-emerald-700">৳${inn}</b></div><div class="bg-red-50 rounded-xl p-3"><p class="text-xs">মোট ব্যয়</p><b class="text-red-700">৳${out}</b></div><div class="bg-blue-50 rounded-xl p-3"><p class="text-xs">ব্যালেন্স</p><b class="text-blue-700">৳${inn - out}</b></div></div>`)
+  + card('নতুন এন্ট্রি', `<div class="grid sm:grid-cols-4 gap-3">${SEL('fi-type','ধরন',[['in','আয় (চাঁদা/অনুদান)'],['out','ব্যয়']])}${I('fi-amt','টাকা','','number')}${I('fi-note','বিবরণ')}${I('fi-date','তারিখ',today(),'date')}</div><div class="mt-3">${BTN('addFin()','যোগ করুন')}</div>`)
+  + card('খতিয়ান', L.map(x => `<div class="flex justify-between border-b py-2 text-sm"><span>${esc(x.date)} — ${esc(x.note)} <span class="text-xs text-slate-400">(${esc(x.by)})</span></span><span class="${x.type === 'in' ? 'text-emerald-700' : 'text-red-700'} font-bold">${x.type === 'in' ? '+' : '−'}৳${x.amt} <button onclick="delFin('${x.id}')" class="text-slate-400 ml-2">×</button></span></div>`).join('') || 'কোনো এন্ট্রি নেই'); };
+function addFin() { const amt = parseFloat($('fi-amt').value); if (!can('manage_finance') || !(amt > 0)) return alert('সঠিক টাকার পরিমাণ দিন।'); cfg.ledger.unshift({id:'f' + Date.now().toString(36),date:$('fi-date').value || today(),type:$('fi-type').value,amt,note:$('fi-note').value.trim() || '—',by:currentUser.name}); log('আর্থিক এন্ট্রি'); saveCfg(true); dashTab('fin'); }
+function delFin(id) { if (!can('manage_finance') || !confirm('এন্ট্রিটি মুছবেন?')) return; cfg.ledger = cfg.ledger.filter(x => x.id !== id); log('আর্থিক এন্ট্রি মোছা'); saveCfg(true); dashTab('fin'); }
+
+/* ডিজিটাল সদস্য কার্ড */
+function memberCard(id) {
+  const a = applications.find(x => x.id === id); if (!a || !a.member) return; const m = a.member, s = cfg.site, w = window.open('', '_blank');
+  w.document.write(`<meta charset="utf-8"><title>সদস্য কার্ড</title><body style="font-family:sans-serif;display:flex;justify-content:center;padding:30px"><div style="width:340px;border:2px solid #10B981;border-radius:14px;overflow:hidden"><div style="background:#1B3B6F;color:#fff;text-align:center;padding:10px"><b>${esc(s.name)}</b><div style="font-size:11px">ডিজিটাল সদস্য কার্ড</div></div><div style="padding:14px;display:flex;gap:12px">${m.photo ? `<img src="${esc(m.photo)}" style="width:90px;height:100px;object-fit:cover;border-radius:8px">` : ''}<div style="font-size:13px;line-height:1.7"><b>${esc(a.name)}</b><br>${esc(m.nameEn)}<br>পিতা: ${esc(m.father)}<br>মোবাইল: ${esc(a.phone)}<br>সদস্য নং: NT-M-${esc(a.id.replace('NT-', ''))}</div></div><div style="background:#ecfdf5;font-size:10px;text-align:center;padding:6px">সভাপতি ও সাধারণ সম্পাদক কর্তৃক অনুমোদিত</div></div></body>`);
+  w.document.close(); w.print();
+}
+
+</script>
 </body>
 </html>

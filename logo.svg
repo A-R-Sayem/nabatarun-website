@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="নবতরুণ সংস্থা">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10b981"/>
+      <stop offset="1" stop-color="#047857"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="96" fill="url(#g)"/>
+  <circle cx="100" cy="100" r="84" fill="none" stroke="#ffffff" stroke-opacity=".5" stroke-width="3"/>
+  <path d="M100 150 V92" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+  <path d="M100 104 C78 104 62 88 60 64 C84 64 100 80 100 104 Z" fill="#ffffff"/>
+  <path d="M100 92 C122 92 140 76 142 50 C116 50 100 68 100 92 Z" fill="#d1fae5"/>
+  <text x="100" y="176" text-anchor="middle" font-family="'Hind Siliguri','Noto Sans Bengali',sans-serif" font-size="22" font-weight="700" fill="#ffffff">নবতরুণ</text>
+</svg>
